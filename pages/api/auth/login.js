@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs'
-import { withIronSessionApiRoute } from 'iron-session/next'
+import { getIronSession } from 'iron-session'
 import clientPromise from '../../../lib/mongodb'
 import Admin from '../../../lib/models/Admin'
 
@@ -14,6 +14,7 @@ const ironOptions = {
 }
 
 async function loginRoute(req, res) {
+  const session = await getIronSession(req, res, ironOptions)
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST')
     return res.status(405).json({ error: 'Method not allowed' })
@@ -52,12 +53,12 @@ async function loginRoute(req, res) {
     }
 
     // Create session
-    req.session.admin = {
+    session.admin = {
       id: admin._id,
       email: admin.email,
     }
 
-    await req.session.save()
+    await session.save()
 
     // Remove password from response
     const { password: _, ...adminWithoutPassword } = admin
@@ -75,4 +76,4 @@ async function loginRoute(req, res) {
   }
 }
 
-export default withIronSessionApiRoute(loginRoute, ironOptions)
+export default loginRoute

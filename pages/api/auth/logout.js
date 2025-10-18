@@ -1,4 +1,4 @@
-import { withIronSessionApiRoute } from 'iron-session/next'
+import { getIronSession } from 'iron-session'
 
 const ironOptions = {
   cookieName: 'admin_session',
@@ -18,7 +18,8 @@ async function logoutRoute(req, res) {
 
   try {
     // Destroy the session
-    req.session.destroy()
+    const session = await getIronSession(req, res, ironOptions)
+    session.destroy()
 
     res.status(200).json({
       message: 'Logout successful'
@@ -32,4 +33,4 @@ async function logoutRoute(req, res) {
   }
 }
 
-export default withIronSessionApiRoute(logoutRoute, ironOptions)
+export default logoutRoute

@@ -30,43 +30,74 @@ export default function QuoteCard({ quote, onCreateStory }) {
     }
   }
 
-  const getFontFamilyClass = (fontFamily) => {
+  const getFontFamily = (fontFamily) => {
     switch (fontFamily) {
       case 'Playfair Display':
-        return 'font-playfair'
+        return '"Playfair Display", serif'
       case 'Lora':
-        return 'font-lora'
+        return '"Lora", serif'
       case 'Montserrat':
       default:
-        return 'font-montserrat'
+        return '"Montserrat", sans-serif'
     }
   }
 
   return (
-    <div className="quote-card group">
-      <div className="relative">
+    <div style={{
+      background: 'rgba(255, 255, 255, 0.1)',
+      backdropFilter: 'blur(10px)',
+      borderRadius: '12px',
+      padding: '24px',
+      border: '1px solid rgba(255, 255, 255, 0.2)',
+      transition: 'all 0.3s ease'
+    }}>
+      <div style={{ position: 'relative' }}>
         {/* Quote Text */}
         <blockquote
-          className={`text-xl md:text-2xl font-medium leading-relaxed mb-4 ${getFontFamilyClass(quote.fontFamily)}`}
-          style={{ color: quote.color || '#ffffff' }}
+          style={{
+            fontSize: '20px',
+            fontWeight: '500',
+            lineHeight: '1.6',
+            marginBottom: '16px',
+            color: quote.color || '#ffffff',
+            fontFamily: getFontFamily(quote.fontFamily)
+          }}
         >
           "{quote.text}"
         </blockquote>
 
         {/* Author */}
         <cite
-          className={`block text-lg opacity-80 ${getFontFamilyClass(quote.fontFamily)}`}
-          style={{ color: quote.color || '#ffffff' }}
+          style={{
+            display: 'block',
+            fontSize: '18px',
+            opacity: '0.8',
+            color: quote.color || '#ffffff',
+            fontFamily: getFontFamily(quote.fontFamily)
+          }}
         >
           — {quote.author}
         </cite>
 
         {/* Action Buttons */}
-        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-          <div className="flex space-x-2">
+        <div style={{
+          position: 'absolute',
+          top: '8px',
+          right: '8px',
+          opacity: '0',
+          transition: 'opacity 0.2s ease'
+        }}>
+          <div style={{ display: 'flex', gap: '8px' }}>
             <button
               onClick={() => setShowShareOptions(!showShareOptions)}
-              className="p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors duration-200"
+              style={{
+                padding: '8px',
+                background: 'rgba(255, 255, 255, 0.2)',
+                borderRadius: '50%',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s ease'
+              }}
               title="Share quote"
             >
               <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -76,10 +107,17 @@ export default function QuoteCard({ quote, onCreateStory }) {
 
             <button
               onClick={() => onCreateStory(quote)}
-              className="p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors duration-200"
+              style={{
+                padding: '8px',
+                background: 'rgba(255, 255, 255, 0.2)',
+                borderRadius: '50%',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s ease'
+              }}
               title="Create story"
             >
-              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20" style={{ color: 'white' }}>
                 <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd"/>
               </svg>
             </button>
@@ -88,10 +126,30 @@ export default function QuoteCard({ quote, onCreateStory }) {
 
         {/* Share Options Dropdown */}
         {showShareOptions && (
-          <div className="absolute top-12 right-2 bg-slate-800 rounded-lg shadow-lg border border-slate-700 z-10">
+          <div style={{
+            position: 'absolute',
+            top: '48px',
+            right: '8px',
+            background: '#1e293b',
+            borderRadius: '8px',
+            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+            border: '1px solid #334155',
+            zIndex: '10'
+          }}>
             <button
               onClick={handleShare}
-              className="block w-full px-4 py-2 text-left text-white hover:bg-slate-700 rounded-lg transition-colors duration-200"
+              style={{
+                display: 'block',
+                width: '100%',
+                padding: '12px 16px',
+                textAlign: 'left',
+                color: 'white',
+                borderRadius: '8px',
+                border: 'none',
+                background: 'transparent',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s ease'
+              }}
             >
               Share Quote
             </button>

@@ -1,4 +1,4 @@
-import { withIronSessionApiRoute } from 'iron-session/next'
+import { getIronSession } from 'iron-session'
 import clientPromise from '../../../lib/mongodb'
 
 const ironOptions = {
@@ -12,6 +12,7 @@ const ironOptions = {
 }
 
 async function quotesRoute(req, res) {
+  const session = await getIronSession(req, res, ironOptions)
   try {
     const client = await clientPromise
     const db = client.db()
@@ -31,7 +32,7 @@ async function quotesRoute(req, res) {
 
       case 'POST':
         // Check if admin is authenticated
-        if (!req.session.admin) {
+        if (!session.admin) {
           return res.status(401).json({
             error: 'Unauthorized. Admin access required.'
           })
@@ -78,4 +79,4 @@ async function quotesRoute(req, res) {
   }
 }
 
-export default withIronSessionApiRoute(quotesRoute, ironOptions)
+export default quotesRoute

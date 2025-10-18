@@ -7,28 +7,26 @@
     @apply border-border;
   }
   body {
-    @apply bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white min-h-screen;
+    @apply text-white min-h-screen;
+    /* Romantic background with dark overlay for text readability */
+    background-image:
+      linear-gradient(
+        rgba(15, 23, 42, 0.85),
+        rgba(30, 41, 59, 0.75)
+      ),
+      var(--background-image, url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%236366f1" width="1200" height="800"/><text x="600" y="400" text-anchor="middle" fill="white" font-family="Arial" font-size="24">Romantic Background Image</text></svg>'));
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
 }
 
-@layer components {
-  .quote-card {
-    @apply bg-white/10 backdrop-blur-sm rounded-xl p-6 shadow-xl border border-white/20 hover:bg-white/20 transition-all duration-300;
-  }
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
-  .btn-primary {
-    @apply bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
-  }
-
-  .btn-secondary {
-    @apply bg-slate-700 hover:bg-slate-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
-  }
-
-  .story-modal {
-    @apply fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50;
-  }
-
-  .story-content {
-    @apply bg-gradient-to-b from-purple-600 to-pink-600 p-8 rounded-xl shadow-2xl aspect-[9/16] max-w-sm w-full flex flex-col justify-center items-center text-center;
-  }
+.quote-card-hover:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
 }

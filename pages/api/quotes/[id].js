@@ -1,4 +1,4 @@
-import { withIronSessionApiRoute } from 'iron-session/next'
+import { getIronSession } from 'iron-session'
 import { ObjectId } from 'mongodb'
 import clientPromise from '../../../lib/mongodb'
 
@@ -13,6 +13,7 @@ const ironOptions = {
 }
 
 async function quoteByIdRoute(req, res) {
+  const session = await getIronSession(req, res, ironOptions)
   const { id } = req.query
 
   // Validate ObjectId
@@ -29,7 +30,7 @@ async function quoteByIdRoute(req, res) {
     switch (req.method) {
       case 'PUT':
         // Check if admin is authenticated
-        if (!req.session.admin) {
+        if (!session.admin) {
           return res.status(401).json({
             error: 'Unauthorized. Admin access required.'
           })
@@ -71,7 +72,7 @@ async function quoteByIdRoute(req, res) {
 
       case 'DELETE':
         // Check if admin is authenticated
-        if (!req.session.admin) {
+        if (!session.admin) {
           return res.status(401).json({
             error: 'Unauthorized. Admin access required.'
           })
@@ -107,4 +108,4 @@ async function quoteByIdRoute(req, res) {
   }
 }
 
-export default withIronSessionApiRoute(quoteByIdRoute, ironOptions)
+export default quoteByIdRoute

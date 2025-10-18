@@ -44,33 +44,68 @@ export default function Home({ initialQuotes = [] }) {
       <Head>
         <title>Inspirational Quotes - Find Your Daily Motivation</title>
         <meta name="description" content="Discover beautiful inspirational quotes to brighten your day" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #7c3aed 50%, #ec4899 100%)' }}>
         {/* Header */}
-        <header className="relative z-10 p-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+        <header style={{
+          position: 'relative',
+          zIndex: '10',
+          padding: '24px',
+          textAlign: 'center'
+        }}>
+          <h1 style={{
+            fontSize: '48px',
+            fontWeight: 'bold',
+            color: 'white',
+            marginBottom: '16px'
+          }}>
             Inspirational Quotes
           </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p style={{
+            fontSize: '20px',
+            color: '#d1d5db',
+            maxWidth: '512px',
+            margin: '0 auto'
+          }}>
             Discover beautiful quotes to inspire and motivate you every day
           </p>
         </header>
 
         {/* Quotes Grid */}
-        <main className="container mx-auto px-6 py-8">
+        <main style={{
+          maxWidth: '1280px',
+          margin: '0 auto',
+          padding: '0 24px',
+          paddingBottom: '32px'
+        }}>
           {loading && quotes.length === 0 ? (
-            <div className="flex justify-center items-center min-h-[400px]">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              minHeight: '400px'
+            }}>
+              <div style={{
+                width: '48px',
+                height: '48px',
+                border: '2px solid white',
+                borderTop: '2px solid transparent',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite'
+              }}></div>
             </div>
           ) : quotes.length === 0 ? (
-            <div className="text-center py-16">
-              <p className="text-gray-400 text-lg">No quotes available at the moment.</p>
+            <div style={{ textAlign: 'center', padding: '64px 0' }}>
+              <p style={{ color: '#9ca3af', fontSize: '18px' }}>No quotes available at the moment.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '32px'
+            }}>
               {quotes.map((quote) => (
                 <QuoteCard
                   key={quote._id}
@@ -91,7 +126,11 @@ export default function Home({ initialQuotes = [] }) {
         )}
 
         {/* Footer */}
-        <footer className="text-center py-8 text-gray-400">
+        <footer style={{
+          textAlign: 'center',
+          padding: '32px 0',
+          color: '#9ca3af'
+        }}>
           <p>&copy; 2024 Inspirational Quotes. Spread positivity and wisdom.</p>
         </footer>
       </div>
@@ -199,22 +238,83 @@ function StoryModal({ quote, onClose }) {
 // This function runs on the server to pre-fetch quotes
 export async function getServerSideProps() {
   try {
-    const response = await fetch(`${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/quotes`)
-    if (response.ok) {
-      const data = await response.json()
+    // Check if MongoDB URI is available
+    if (!process.env.MONGODB_URI) {
+      console.log('MongoDB URI not found, using fallback quotes')
       return {
         props: {
-          initialQuotes: data.data || []
+          initialQuotes: getFallbackQuotes()
         }
       }
     }
-  } catch (error) {
-    console.error('Error fetching quotes for SSR:', error)
-  }
 
-  return {
-    props: {
-      initialQuotes: []
+    // Connect directly to MongoDB for SSR
+    const { MongoClient } = require('mongodb')
+    const client = new MongoClient(process.env.MONGODB_URI)
+
+    await client.connect()
+    const db = client.db()
+
+    const quotes = await db.collection('quotes')
+      .find({})
+      .sort({ createdAt: -1 })
+      .limit(20)
+      .toArray()
+
+    await client.close()
+
+    // Convert MongoDB ObjectIds to strings for JSON serialization
+    const serializedQuotes = quotes.map(quote => ({
+      ...quote,
+      _id: quote._id.toString(),
+      createdAt: quote.createdAt ? quote.createdAt.toISOString() : new Date().toISOString(),
+      updatedAt: quote.updatedAt ? quote.updatedAt.toISOString() : new Date().toISOString()
+    }))
+
+    return {
+      props: {
+        initialQuotes: serializedQuotes || getFallbackQuotes()
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching quotes for SSR:', error.message)
+    return {
+      props: {
+        initialQuotes: getFallbackQuotes()
+      }
     }
   }
+}
+
+// Fallback quotes when database is not available
+function getFallbackQuotes() {
+  return [
+    {
+      _id: '1',
+      text: 'The only way to do great work is to love what you do.',
+      author: 'Steve Jobs',
+      fontFamily: 'Playfair Display',
+      color: '#fbbf24',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    },
+    {
+      _id: '2',
+      text: 'Success is not final, failure is not fatal: It is the courage to continue that counts.',
+      author: 'Winston Churchill',
+      fontFamily: 'Lora',
+      color: '#10b981',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    },
+    {
+      _id: '3',
+      text: 'The future belongs to those who believe in the beauty of their dreams.',
+      author: 'Eleanor Roosevelt',
+      fontFamily: 'Montserrat',
+      color: '#ec4899',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    }
+  ]
 }
