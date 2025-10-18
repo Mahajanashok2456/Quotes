@@ -1,0 +1,53 @@
+import React from 'react'
+
+function Error({ statusCode }) {
+  return (
+    <div style={{
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, #0f172a 0%, #7c3aed 50%, #ec4899 100%)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      <div style={{ textAlign: 'center' }}>
+        <h1 style={{
+          fontSize: '64px',
+          fontWeight: 'bold',
+          color: 'white',
+          marginBottom: '16px'
+        }}>
+          {statusCode || 'Error'}
+        </h1>
+        <p style={{
+          fontSize: '20px',
+          color: '#d1d5db',
+          marginBottom: '32px'
+        }}>
+          {statusCode === 404
+            ? 'The page you are looking for could not be found.'
+            : 'An unexpected error occurred.'}
+        </p>
+        <a
+          href="/"
+          style={{
+            background: '#7c3aed',
+            color: 'white',
+            padding: '8px 16px',
+            borderRadius: '8px',
+            textDecoration: 'none',
+            transition: 'background-color 0.2s ease'
+          }}
+        >
+          Go back home
+        </a>
+      </div>
+    </div>
+  )
+}
+
+Error.getInitialProps = ({ res, err }) => {
+  const statusCode = res ? res.statusCode : err ? err.statusCode : 404
+  return { statusCode }
+}
+
+export default Error
