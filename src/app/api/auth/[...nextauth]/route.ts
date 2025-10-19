@@ -3,6 +3,18 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { connectToMongoose } from "@/lib/mongodb";
 import User from "@/models/User";
 
+// Extend the built-in session types
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+    }
+  }
+}
+
 const nextAuthOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -58,27 +70,31 @@ const nextAuthOptions: NextAuthOptions = {
       }
     })
   ],
-  secret: process.env.NEXTAUTH_SECRET,
-  pages: {
-    signIn: "/manage-mahajan/login",
-  },
+  
+  // ADD THE FOLLOWING SESSION AND CALLBACKS CONFIGURATION:
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
   callbacks: {
     async jwt({ token, user }) {
+      // On sign-in, add the user's ID to the token
       if (user) {
         token.id = user.id;
       }
       return token;
     },
     async session({ session, token }) {
-      if (token && session.user) {
-        // @ts-expect-error - Need to add id property to session user object
+      // Add the user ID from the token to the client-side session object
+      if (session.user) {
         session.user.id = token.id as string;
       }
       return session;
-    }
+    },
+  },
+
+  secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/manage-mahajan/login",
   },
 };
 
