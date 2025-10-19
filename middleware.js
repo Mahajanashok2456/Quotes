@@ -1,5 +1,6 @@
 export { default } from 'next-auth/middleware';
 
 export const config = {
-  matcher: '/manage-content-a3f8b1c9/:path*',
+  // Replace the path with your actual secret admin route
+  matcher: '/manage-mahajan/:path*', 
 };
