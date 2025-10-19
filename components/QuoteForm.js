@@ -161,13 +161,13 @@ export default function QuoteForm({ quote, onSuccess, onCancel }) {
             className={`text-lg font-medium leading-relaxed mb-2 font-${formData.fontFamily.toLowerCase().replace(' ', '-')}`}
             style={{ color: formData.color }}
           >
-            "{formData.text || 'Your quote will appear here...'}"
+            &quot;{formData.text || 'Your quote will appear here...'}&quot;
           </blockquote>
           <cite
             className={`block text-sm opacity-80 font-${formData.fontFamily.toLowerCase().replace(' ', '-')}`}
             style={{ color: formData.color }}
           >
-            — {formData.author || 'Author'}
+            &mdash; {formData.author || 'Author'}
           </cite>
         </div>
       </div>

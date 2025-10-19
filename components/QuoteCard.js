@@ -63,7 +63,7 @@ export default function QuoteCard({ quote, onCreateStory }) {
             fontFamily: getFontFamily(quote.fontFamily)
           }}
         >
-          "{quote.text}"
+          &quot;{quote.text}&quot;
         </blockquote>
 
         {/* Author */}
@@ -76,7 +76,7 @@ export default function QuoteCard({ quote, onCreateStory }) {
             fontFamily: getFontFamily(quote.fontFamily)
           }}
         >
-          — {quote.author}
+          &mdash; {quote.author}
         </cite>
 
         {/* Action Buttons */}

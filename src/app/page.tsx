@@ -1,8 +1,6 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-// @ts-ignore
-import html2canvas from 'html2canvas';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import Typewriter from './Typewriter';
@@ -211,7 +209,7 @@ export default function Home() {
               <div className="overflow-y-auto pr-4 flex-grow">
                 {/* Modal Content */}
                 <p className="text-3xl md:text-5xl font-bold leading-tight mb-6">
-                  "{selectedQuote.text}"
+                  &quot;{selectedQuote.text}&quot;
                 </p>
                 <p className="text-xl md:text-2xl opacity-80">— {selectedQuote.author}</p>
               </div>
@@ -308,7 +306,7 @@ function QuoteCard({ quote, onCardClick }: { quote: Quote; onCardClick: (quote: 
               color: quote.font_color || '#000000'
             }}
           >
-            "<Typewriter text={quote.text} />"
+            &quot;<Typewriter text={quote.text} />&quot;
           </p>
           {quote.text.length > 200 && (
             <button 

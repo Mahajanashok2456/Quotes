@@ -6,7 +6,7 @@ import { NextResponse } from 'next/server';
  * GET /api/quotes
  * Fetches all quotes from the database
  */
-export async function GET(request) {
+export async function GET() {
   try {
     // Connect to the database
     const { db } = await connectToDatabase();

@@ -51,7 +51,7 @@ export default function QuoteTable({ quotes, onEdit, onDelete }) {
                       className={`text-sm ${getFontFamilyClass(quote.fontFamily)}`}
                       style={{ color: quote.color || '#ffffff' }}
                     >
-                      "{quote.text.length > 100 ? `${quote.text.substring(0, 100)}...` : quote.text}"
+                      &quot;{quote.text.length > 100 ? `${quote.text.substring(0, 100)}...` : quote.text}&quot;
                     </p>
                   </div>
                 </td>

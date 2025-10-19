@@ -73,7 +73,7 @@ const nextAuthOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (token && session.user) {
-        // @ts-ignore
+        // @ts-expect-error - Need to add id property to session user object
         session.user.id = token.id as string;
       }
       return session;

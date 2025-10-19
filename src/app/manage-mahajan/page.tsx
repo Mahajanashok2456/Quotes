@@ -1,6 +1,5 @@
 'use client';
 
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -14,7 +13,6 @@ interface Quote {
 }
 
 export default function AdminPage() {
-  const { data: session, status } = useSession();
   const router = useRouter();
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [loading, setLoading] = useState(true);
@@ -30,17 +28,13 @@ export default function AdminPage() {
 
   // Redirect to login if not authenticated
   useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/manage-mahajan/login");
-    }
-  }, [status, router]);
+    // We'll handle authentication through middleware instead
+  }, [router]);
 
   // Fetch quotes
   useEffect(() => {
-    if (status === "authenticated") {
-      fetchQuotes();
-    }
-  }, [status]);
+    fetchQuotes();
+  }, []);
 
   const fetchQuotes = async () => {
     try {
@@ -155,235 +149,217 @@ export default function AdminPage() {
     setEditingId(null);
   };
 
-  // Show loading state while checking session
-  if (status === "loading") {
-    return (
-      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-foreground mx-auto"></div>
-          <p className="mt-4">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Show content only if authenticated
-  if (status === "authenticated") {
-    return (
-      <div className="min-h-screen bg-background text-foreground p-4 sm:p-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
-            <div>
-              <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-              <p className="text-gray-600 dark:text-gray-400">
-                Manage all quotes in the system
-              </p>
-            </div>
-            <button
-              onClick={() => router.push('/')}
-              className="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg transition-colors"
-            >
-              View Public Page
-            </button>
+  return (
+    <div className="min-h-screen bg-background text-foreground p-4 sm:p-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+          <div>
+            <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+            <p className="text-gray-600 dark:text-gray-400">
+              Manage all quotes in the system
+            </p>
           </div>
+          <button
+            onClick={() => router.push('/')}
+            className="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg transition-colors"
+          >
+            View Public Page
+          </button>
+        </div>
 
-          {error && (
-            <div className="bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-300 rounded-lg p-4 mb-6">
-              {error}
-            </div>
-          )}
+        {error && (
+          <div className="bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-300 rounded-lg p-4 mb-6">
+            {error}
+          </div>
+        )}
 
-          {/* Quote Form */}
-          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-8">
-            <h2 className="text-2xl font-semibold mb-4">
-              {editingId ? 'Edit Quote' : 'Add New Quote'}
-            </h2>
-            <form onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div className="md:col-span-2">
-                  <label htmlFor="text" className="block text-sm font-medium mb-2">
-                    Quote Text
-                  </label>
-                  <textarea
-                    id="text"
-                    name="text"
-                    value={formData.text}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800"
-                    placeholder="Enter the quote text"
-                    rows={3}
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="author" className="block text-sm font-medium mb-2">
-                    Author
-                  </label>
-                  <input
-                    type="text"
-                    id="author"
-                    name="author"
-                    value={formData.author}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800"
-                    placeholder="Author name"
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="font_family" className="block text-sm font-medium mb-2">
-                    Font Family
-                  </label>
-                  <input
-                    type="text"
-                    id="font_family"
-                    name="font_family"
-                    value={formData.font_family}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800"
-                    placeholder="Font family (e.g., Arial, Times New Roman)"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="font_color" className="block text-sm font-medium mb-2">
-                    Font Color
-                  </label>
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="color"
-                      id="font_color"
-                      name="font_color"
-                      value={formData.font_color}
-                      onChange={handleInputChange}
-                      className="w-12 h-10 border border-gray-300 dark:border-gray-700 rounded-lg cursor-pointer"
-                    />
-                    <input
-                      type="text"
-                      value={formData.font_color}
-                      onChange={handleInputChange}
-                      name="font_color"
-                      className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800"
-                      placeholder="#000000"
-                    />
-                  </div>
-                </div>
+        {/* Quote Form */}
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-8">
+          <h2 className="text-2xl font-semibold mb-4">
+            {editingId ? 'Edit Quote' : 'Add New Quote'}
+          </h2>
+          <form onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div className="md:col-span-2">
+                <label htmlFor="text" className="block text-sm font-medium mb-2">
+                  Quote Text
+                </label>
+                <textarea
+                  id="text"
+                  name="text"
+                  value={formData.text}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800"
+                  placeholder="Enter the quote text"
+                  rows={3}
+                  required
+                />
               </div>
               
-              <div className="flex flex-wrap gap-3">
-                <button
-                  type="submit"
-                  className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
-                >
-                  {editingId ? 'Update Quote' : 'Add Quote'}
-                </button>
-                
-                {editingId && (
-                  <button
-                    type="button"
-                    onClick={handleCancelEdit}
-                    className="px-6 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-medium rounded-lg transition-colors"
-                  >
-                    Cancel
-                  </button>
-                )}
+              <div>
+                <label htmlFor="author" className="block text-sm font-medium mb-2">
+                  Author
+                </label>
+                <input
+                  type="text"
+                  id="author"
+                  name="author"
+                  value={formData.author}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800"
+                  placeholder="Author name"
+                  required
+                />
               </div>
-            </form>
-          </div>
-
-          {/* Quotes Table */}
-          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-md overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
-              <h2 className="text-2xl font-semibold">All Quotes</h2>
-              <p className="text-gray-600 dark:text-gray-400">
-                Manage existing quotes ({quotes.length} total)
-              </p>
+              
+              <div>
+                <label htmlFor="font_family" className="block text-sm font-medium mb-2">
+                  Font Family
+                </label>
+                <input
+                  type="text"
+                  id="font_family"
+                  name="font_family"
+                  value={formData.font_family}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800"
+                  placeholder="Font family (e.g., Arial, Times New Roman)"
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="font_color" className="block text-sm font-medium mb-2">
+                  Font Color
+                </label>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="color"
+                    id="font_color"
+                    name="font_color"
+                    value={formData.font_color}
+                    onChange={handleInputChange}
+                    className="w-12 h-10 border border-gray-300 dark:border-gray-700 rounded-lg cursor-pointer"
+                  />
+                  <input
+                    type="text"
+                    value={formData.font_color}
+                    onChange={handleInputChange}
+                    name="font_color"
+                    className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800"
+                    placeholder="#000000"
+                  />
+                </div>
+              </div>
             </div>
             
-            {loading ? (
-              <div className="p-8 text-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-foreground mx-auto"></div>
-                <p className="mt-4">Loading quotes...</p>
-              </div>
-            ) : quotes.length === 0 ? (
-              <div className="p-8 text-center">
-                <p className="text-gray-600 dark:text-gray-400">No quotes found. Add your first quote above!</p>
-              </div>
-            ) : (
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
-                  <thead className="bg-gray-50 dark:bg-gray-800">
-                    <tr>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                        Quote
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                        Author
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                        Font
-                      </th>
-                      <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                        Actions
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
-                    {quotes.map((quote) => (
-                      <tr key={quote._id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
-                        <td className="px-6 py-4 whitespace-normal max-w-xs">
-                          <div className="text-sm text-gray-900 dark:text-gray-100 line-clamp-2">
-                            "{quote.text}"
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900 dark:text-gray-100">
-                            {quote.author}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900 dark:text-gray-100">
-                            <span 
-                              className="font-medium"
-                              style={{ fontFamily: quote.font_family }}
-                            >
-                              {quote.font_family}
-                            </span>
-                            <div 
-                              className="w-4 h-4 inline-block ml-2 border border-gray-300"
-                              style={{ backgroundColor: quote.font_color }}
-                            ></div>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <button
-                            onClick={() => handleEdit(quote)}
-                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 mr-4"
-                          >
-                            Edit
-                          </button>
-                          <button
-                            onClick={() => handleDelete(quote._id)}
-                            disabled={deletingId === quote._id}
-                            className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 disabled:opacity-50"
-                          >
-                            {deletingId === quote._id ? 'Deleting...' : 'Delete'}
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+            <div className="flex flex-wrap gap-3">
+              <button
+                type="submit"
+                className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+              >
+                {editingId ? 'Update Quote' : 'Add Quote'}
+              </button>
+              
+              {editingId && (
+                <button
+                  type="button"
+                  onClick={handleCancelEdit}
+                  className="px-6 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-medium rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
+
+        {/* Quotes Table */}
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-md overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+            <h2 className="text-2xl font-semibold">All Quotes</h2>
+            <p className="text-gray-600 dark:text-gray-400">
+              Manage existing quotes ({quotes.length} total)
+            </p>
           </div>
+          
+          {loading ? (
+            <div className="p-8 text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-foreground mx-auto"></div>
+              <p className="mt-4">Loading quotes...</p>
+            </div>
+          ) : quotes.length === 0 ? (
+            <div className="p-8 text-center">
+              <p className="text-gray-600 dark:text-gray-400">No quotes found. Add your first quote above!</p>
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
+                <thead className="bg-gray-50 dark:bg-gray-800">
+                  <tr>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      Quote
+                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      Author
+                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      Font
+                    </th>
+                    <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
+                  {quotes.map((quote) => (
+                    <tr key={quote._id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                      <td className="px-6 py-4 whitespace-normal max-w-xs">
+                        <div className="text-sm text-gray-900 dark:text-gray-100 line-clamp-2">
+                          &quot;{quote.text}&quot;
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900 dark:text-gray-100">
+                          {quote.author}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900 dark:text-gray-100">
+                          <span 
+                            className="font-medium"
+                            style={{ fontFamily: quote.font_family }}
+                          >
+                            {quote.font_family}
+                          </span>
+                          <div 
+                            className="w-4 h-4 inline-block ml-2 border border-gray-300"
+                            style={{ backgroundColor: quote.font_color }}
+                          ></div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <button
+                          onClick={() => handleEdit(quote)}
+                          className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 mr-4"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDelete(quote._id)}
+                          disabled={deletingId === quote._id}
+                          className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 disabled:opacity-50"
+                        >
+                          {deletingId === quote._id ? 'Deleting...' : 'Delete'}
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </div>
-    );
-  }
-
-  // Return null while redirecting
-  return null;
+    </div>
+  );
 }

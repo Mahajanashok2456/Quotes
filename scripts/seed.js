@@ -1,6 +1,8 @@
-require('dotenv').config({ path: '.env.local' })
-const bcrypt = require('bcryptjs')
-const { MongoClient } = require('mongodb')
+import dotenv from 'dotenv'
+import bcrypt from 'bcryptjs'
+import { MongoClient } from 'mongodb'
+
+dotenv.config({ path: '.env.local' })
 
 const uri = process.env.MONGODB_URI
 
