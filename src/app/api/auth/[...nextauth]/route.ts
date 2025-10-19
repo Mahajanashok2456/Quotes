@@ -58,6 +58,7 @@ const nextAuthOptions: NextAuthOptions = {
       }
     })
   ],
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/manage-mahajan/login",
   },
@@ -79,7 +80,6 @@ const nextAuthOptions: NextAuthOptions = {
       return session;
     }
   },
-  secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(nextAuthOptions);
