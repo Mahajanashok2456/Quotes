@@ -112,7 +112,7 @@ export default function Home() {
                 className="text-5xl md:text-7xl font-serif text-soft-peach" 
                 style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.7)' }}
               >
-                Find Your Inspiration
+                Lets connect with Thoughts !
               </motion.h1>
               <motion.p 
                 initial={{ opacity: 0 }}
@@ -120,7 +120,7 @@ export default function Home() {
                 transition={{ duration: 1.0, delay: 1.5 }}
                 className="mt-4 text-lg md:text-xl text-light-cream"
               >
-                A collection of wisdom awaits...
+                A collection of own feelings...
               </motion.p>
             </div>
 

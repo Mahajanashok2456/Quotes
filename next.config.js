@@ -4,6 +4,9 @@ const nextConfig = {
     MONGODB_URI: process.env.MONGODB_URI,
     SECRET_COOKIE_PASSWORD: process.env.SECRET_COOKIE_PASSWORD,
   },
-}
+  devIndicators: {
+    devTools: false,
+  },
+};
 
-module.exports = nextConfig
+export default nextConfig;
