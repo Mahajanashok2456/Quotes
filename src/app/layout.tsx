@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Cookie, Homemade_Apple } from "next/font/google";
 import "./globals.css";
 import Providers from "./Providers";
+import AdminLoginModal from "./components/AdminLoginModal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,6 +46,7 @@ export default function RootLayout({
         <Providers>
           {children}
         </Providers>
+        <AdminLoginModal />
       </body>
     </html>
   );
