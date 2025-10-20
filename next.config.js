@@ -7,6 +7,9 @@ const nextConfig = {
   devIndicators: {
     devTools: false,
   },
+  experimental: {
+    instrumentationHook: true,
+  },
 };
 
 export default nextConfig;
