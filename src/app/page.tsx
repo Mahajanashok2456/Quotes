@@ -206,7 +206,7 @@ export default function Home() {
               {/* Scrollable content container */}
               <div className="overflow-y-auto pr-4 flex-grow">
                 {/* Modal Content */}
-                <p className="text-3xl md:text-5xl font-bold leading-tight mb-6">
+                <p className="text-3xl md:text-5xl font-bold leading-tight mb-6 whitespace-pre-wrap">
                   &quot;{selectedQuote.text}&quot;
                 </p>
                 <p className="text-xl md:text-2xl opacity-80">— {selectedQuote.author}</p>
@@ -283,9 +283,9 @@ function QuoteCard({ quote, onCardClick }: { quote: Quote; onCardClick: (quote: 
     >
       <div className="flex flex-col h-full">
         <div className="flex-grow">
-          <p 
-            className={`text-xl mb-4 italic ${!expanded && quote.text.length > 200 ? 'line-clamp-5' : ''}`}
-            style={{ 
+          <p
+            className={`text-xl mb-4 italic whitespace-pre-wrap ${!expanded && quote.text.length > 200 ? 'line-clamp-5' : ''}`}
+            style={{
               fontFamily: quote.font_family || 'Arial, sans-serif',
               color: quote.font_color || '#000000'
             }}
