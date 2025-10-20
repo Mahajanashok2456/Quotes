@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 
 interface Quote {
   _id: string;
@@ -14,6 +15,7 @@ interface Quote {
 
 export default function AdminPage() {
   const router = useRouter();
+  const { data: session, status } = useSession();
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -28,8 +30,11 @@ export default function AdminPage() {
 
   // Redirect to login if not authenticated
   useEffect(() => {
-    // We'll handle authentication through middleware instead
-  }, [router]);
+    if (status === 'loading') return; // Still loading
+    if (status === 'unauthenticated') {
+      router.push('/manage-content-a3f8b1c9/login');
+    }
+  }, [status, router]);
 
   // Fetch quotes
   useEffect(() => {
@@ -149,22 +154,54 @@ export default function AdminPage() {
     setEditingId(null);
   };
 
+  // Show loading while checking authentication
+  if (status === 'loading') {
+    return (
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-foreground mx-auto"></div>
+          <p className="mt-4">Checking authentication...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Redirect if not authenticated (this shouldn't happen due to middleware, but just in case)
+  if (status === 'unauthenticated') {
+    return null; // Component will redirect via useEffect
+  }
+
   return (
     <div className="min-h-screen bg-background text-foreground p-4 sm:p-8">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
           <div>
-            <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+            <div className="flex items-center gap-4 mb-2">
+              <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+              {session?.user && (
+                <div className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full text-sm font-medium">
+                  Welcome, {session.user.name || session.user.email}
+                </div>
+              )}
+            </div>
             <p className="text-gray-600 dark:text-gray-400">
               Manage all quotes in the system
             </p>
           </div>
-          <button
-            onClick={() => router.push('/')}
-            className="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg transition-colors"
-          >
-            View Public Page
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={() => router.push('/')}
+              className="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg transition-colors"
+            >
+              View Public Page
+            </button>
+            <button
+              onClick={() => signOut({ callbackUrl: '/' })}
+              className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+            >
+              Sign Out
+            </button>
+          </div>
         </div>
 
         {error && (
