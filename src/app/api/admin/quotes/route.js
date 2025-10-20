@@ -53,32 +53,31 @@ export async function POST(request) {
 }
 
 /**
- * PUT /api/admin/quotes/:id
- * Updates an existing quote by ID
+ * PUT /api/admin/quotes
+ * Updates an existing quote by ID (ID passed in request body)
  */
 export async function PUT(request) {
   try {
     // Connect to the database
     const { db } = await connectToDatabase();
-    
-    // Get quote ID from URL
-    const url = new URL(request.url);
-    const id = url.pathname.split('/').pop();
-    
+
+    // Get request body
+    const body = await request.json();
+
+    // Extract ID from request body
+    const { id, ...quoteData } = body;
+
     // Validate ID format
-    if (!ObjectId.isValid(id)) {
+    if (!id || !ObjectId.isValid(id)) {
       return NextResponse.json({
         success: false,
         error: 'Invalid quote ID'
       }, { status: 400 });
     }
-    
-    // Get request body
-    const body = await request.json();
-    
+
     // Create quote instance with updated data
-    const quote = new Quote(body);
-    
+    const quote = new Quote(quoteData);
+
     // Validate quote data
     const validation = quote.validate();
     if (!validation.isValid) {
@@ -88,14 +87,14 @@ export async function PUT(request) {
         message: validation.errors
       }, { status: 400 });
     }
-    
+
     // Update quote in database
     const quotesCollection = db.collection('quotes');
     const result = await quotesCollection.updateOne(
       { _id: new ObjectId(id) },
       { $set: quote.toObject() }
     );
-    
+
     // Check if quote was found and updated
     if (result.matchedCount === 0) {
       return NextResponse.json({
@@ -103,7 +102,7 @@ export async function PUT(request) {
         error: 'Quote not found'
       }, { status: 404 });
     }
-    
+
     // Return successful response
     return NextResponse.json({
       success: true,
@@ -112,10 +111,10 @@ export async function PUT(request) {
         ...quote.toObject()
       }
     }, { status: 200 });
-    
+
   } catch (error) {
     console.error('Error updating quote:', error);
-    
+
     return NextResponse.json({
       success: false,
       error: 'Failed to update quote',
@@ -125,30 +124,30 @@ export async function PUT(request) {
 }
 
 /**
- * DELETE /api/admin/quotes/:id
- * Deletes a quote by ID
+ * DELETE /api/admin/quotes
+ * Deletes a quote by ID (ID passed in request body)
  */
 export async function DELETE(request) {
   try {
     // Connect to the database
     const { db } = await connectToDatabase();
-    
-    // Get quote ID from URL
-    const url = new URL(request.url);
-    const id = url.pathname.split('/').pop();
-    
+
+    // Get request body
+    const body = await request.json();
+    const { id } = body;
+
     // Validate ID format
-    if (!ObjectId.isValid(id)) {
+    if (!id || !ObjectId.isValid(id)) {
       return NextResponse.json({
         success: false,
         error: 'Invalid quote ID'
       }, { status: 400 });
     }
-    
+
     // Delete quote from database
     const quotesCollection = db.collection('quotes');
     const result = await quotesCollection.deleteOne({ _id: new ObjectId(id) });
-    
+
     // Check if quote was found and deleted
     if (result.deletedCount === 0) {
       return NextResponse.json({
@@ -156,16 +155,16 @@ export async function DELETE(request) {
         error: 'Quote not found'
       }, { status: 404 });
     }
-    
+
     // Return successful response
     return NextResponse.json({
       success: true,
       message: 'Quote deleted successfully'
     }, { status: 200 });
-    
+
   } catch (error) {
     console.error('Error deleting quote:', error);
-    
+
     return NextResponse.json({
       success: false,
       error: 'Failed to delete quote',

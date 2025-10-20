@@ -70,21 +70,25 @@ export default function AdminPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
-      const url = editingId ? `/api/admin/quotes/${editingId}` : '/api/admin/quotes';
+      const url = '/api/admin/quotes';
       const method = editingId ? 'PUT' : 'POST';
-      
+
+      const requestBody = editingId
+        ? { ...formData, id: editingId }
+        : formData;
+
       const response = await fetch(url, {
         method,
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(requestBody),
       });
-      
+
       const data = await response.json();
-      
+
       if (data.success) {
         // Reset form
         setFormData({
@@ -94,7 +98,7 @@ export default function AdminPage() {
           font_color: '#000000'
         });
         setEditingId(null);
-        
+
         // Refresh quotes
         fetchQuotes();
       } else {
@@ -102,7 +106,6 @@ export default function AdminPage() {
       }
     } catch (err) {
       setError(`Failed to ${editingId ? 'update' : 'create'} quote`);
-      console.error('Error saving quote:', err);
     }
   };
 
@@ -120,16 +123,20 @@ export default function AdminPage() {
     if (!confirm('Are you sure you want to delete this quote?')) {
       return;
     }
-    
+
     setDeletingId(id);
-    
+
     try {
-      const response = await fetch(`/api/admin/quotes/${id}`, {
+      const response = await fetch(`/api/admin/quotes?id=${id}`, {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id }),
       });
-      
+
       const data = await response.json();
-      
+
       if (data.success) {
         // Refresh quotes
         fetchQuotes();
@@ -138,7 +145,6 @@ export default function AdminPage() {
       }
     } catch (err) {
       setError('Failed to delete quote');
-      console.error('Error deleting quote:', err);
     } finally {
       setDeletingId(null);
     }
