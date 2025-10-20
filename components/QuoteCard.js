@@ -19,13 +19,12 @@ export default function QuoteCard({ quote, onCreateStory }) {
         alert('Quote copied to clipboard!')
       }
     } catch (error) {
-      console.error('Error sharing:', error)
       // Fallback to clipboard
       try {
         await navigator.clipboard.writeText(shareData.text)
         alert('Quote copied to clipboard!')
       } catch (clipboardError) {
-        console.error('Clipboard error:', clipboardError)
+        // Silently handle clipboard errors
       }
     }
   }

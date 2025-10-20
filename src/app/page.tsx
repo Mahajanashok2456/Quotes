@@ -53,14 +53,12 @@ export default function Home() {
         const data = await response.json();
         
         if (data.success) {
-          console.log('Fetched quotes:', data.data);
           setQuotes(data.data);
         } else {
           setError(data.error || 'Failed to fetch quotes');
         }
       } catch (err) {
         setError('Failed to fetch quotes');
-        console.error('Error fetching quotes:', err);
       } finally {
         setLoading(false);
       }
@@ -227,8 +225,6 @@ export default function Home() {
 }
 
 function QuoteCard({ quote, onCardClick }: { quote: Quote; onCardClick: (quote: Quote) => void }) {
-  console.log('QuoteCard received quote:', quote);
-  
   const cardRef = useRef<HTMLDivElement>(null);
   const [likes, setLikes] = useState(quote.likes || 0);
   const [copied, setCopied] = useState(false);
@@ -236,38 +232,27 @@ function QuoteCard({ quote, onCardClick }: { quote: Quote; onCardClick: (quote: 
 
   const handleLike = async (quoteId: string) => {
     try {
-      // Debug logging
-      console.log('Attempting to like quote with ID:', quoteId);
-      
       // Check if quoteId is valid
       if (!quoteId || quoteId === 'undefined') {
-        console.error('Invalid quote ID provided:', quoteId);
         alert('Invalid quote ID provided');
         return;
       }
 
       const url = `/api/quotes/${encodeURIComponent(quoteId)}/like`;
-      console.log('Fetching URL:', url);
-      
+
       const response = await fetch(url, {
         method: 'PUT',
       });
-      
-      console.log('Response status:', response.status);
-      console.log('Response headers:', [...response.headers.entries()]);
-      
+
       const data = await response.json();
-      console.log('Like response:', data);
       
       if (response.ok && data.success) {
         setLikes(data.data.likes);
       } else {
         const errorMessage = data.message || data.error || 'Unknown error';
-        console.error('Failed to like quote:', errorMessage);
         alert(`Failed to like quote: ${errorMessage}`);
       }
     } catch (error) {
-      console.error('Error liking quote:', error);
       alert('Failed to like quote due to network error');
     }
   };
@@ -278,7 +263,6 @@ function QuoteCard({ quote, onCardClick }: { quote: Quote; onCardClick: (quote: 
       setCopied(true);
       setTimeout(() => setCopied(false), 2000); // Reset copied status after 2 seconds
     } catch (error) {
-      console.error('Error copying quote:', error);
       alert('Failed to copy quote to clipboard');
     }
   };
