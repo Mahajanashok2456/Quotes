@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import Typewriter from './Typewriter';
+import { formatDate } from '../lib/utils';
 
 interface Quote {
   _id: string;
@@ -304,6 +305,11 @@ function QuoteCard({ quote, onCardClick }: { quote: Quote; onCardClick: (quote: 
             </button>
           )}
           <p className="font-semibold text-right">— {quote.author}</p>
+        </div>
+        <div className="mt-4 mb-2">
+          <p className="text-xs text-gray-400 text-right">
+            {formatDate(quote.created_at)}
+          </p>
         </div>
         <div className="flex items-center justify-end gap-4 mt-4">
           <button 
