@@ -1,6 +1,7 @@
 export { default } from 'next-auth/middleware';
 
 export const config = {
-  // Protect only the admin dashboard, not the login page
-  matcher: ['/manage-mahajan/:path*', '/((?!manage-mahajan/login).*)'],
+  // IMPORTANT: Replace this path with your actual secret admin route
+  // e.g., '/manage-content-a3f8b1c9/:path*'
+  matcher: '/manage-mahajan/:path*', 
 };
