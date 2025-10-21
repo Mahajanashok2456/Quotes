@@ -29,7 +29,7 @@ const homemadeApple = Homemade_Apple({
 
 export const metadata: Metadata = {
   title: "Echoes of Mahajan",
-  description: "A collection of wisdom from great minds.",
+  description: "A curated collection of deeply aesthetic and inspiring quotes, poetry, and thoughts. Find your next moment of motivation or a perfect quote for sharing on social media.",
 };
 
 export default function RootLayout({
