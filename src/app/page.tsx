@@ -227,21 +227,29 @@ function QuoteCard({ quote, onCardClick }: { quote: Quote; onCardClick: (quote: 
         return;
       }
 
+      // Immediate Update: Increment likes count optimistically
+      setLikes(prevLikes => prevLikes + 1);
+
       const url = `/api/quotes/${encodeURIComponent(quoteId)}/like`;
 
+      // Background Fetch: Start the API request
       const response = await fetch(url, {
         method: 'PUT',
       });
 
       const data = await response.json();
-      
-      if (response.ok && data.success) {
-        setLikes(data.data.likes);
-      } else {
+
+      // Error Reversion: If request fails, revert the optimistic update
+      if (!response.ok || !data.success) {
+        setLikes(prevLikes => prevLikes - 1); // Revert optimistic update
         const errorMessage = data.message || data.error || 'Unknown error';
+        console.error('Failed to like quote:', errorMessage);
         alert(`Failed to like quote: ${errorMessage}`);
       }
     } catch (error) {
+      // Error Reversion: Revert optimistic update on network error
+      setLikes(prevLikes => prevLikes - 1);
+      console.error('Failed to like quote due to network error:', error);
       alert('Failed to like quote due to network error');
     }
   };
