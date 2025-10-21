@@ -8,6 +8,10 @@ import AdminLoginForm from './AdminLoginForm';
 const AdminLoginModal = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
       {/* Trigger Button */}
@@ -36,7 +40,7 @@ const AdminLoginModal = () => {
               exit={{ scale: 0.9, opacity: 0 }}
               className="bg-gray-800/50 border border-white/10 rounded-xl p-8 w-full max-w-md shadow-2xl"
             >
-              <AdminLoginForm />
+              <AdminLoginForm onLoginSuccess={handleCloseModal} />
             </motion.div>
           </motion.div>
         )}

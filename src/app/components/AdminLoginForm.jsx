@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-const AdminLoginForm = () => {
+const AdminLoginForm = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -28,7 +28,11 @@ const AdminLoginForm = () => {
         setError('Invalid email or password. Please try again.');
         setIsLoading(false);
       } else if (result.ok) {
-        // On successful login, redirect to the admin dashboard
+        // Close the modal immediately upon successful login
+        if (onLoginSuccess) {
+          onLoginSuccess(); // Close the modal
+        }
+        // Then redirect to the admin dashboard
         router.push('/manage-content-a3f8b1c9'); // <-- Use your actual secret admin route!
       }
     } catch (err) {
