@@ -43,6 +43,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${cookie.variable} ${homemadeApple.variable} antialiased`}
         suppressHydrationWarning
       >
+        <div className="overlay"></div>
         <Providers>
           {children}
         </Providers>

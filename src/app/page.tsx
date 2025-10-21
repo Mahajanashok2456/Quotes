@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import Typewriter from './Typewriter';
 import { formatDate } from '../lib/utils';
@@ -137,17 +136,6 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
-      <Image
-        src="/annie-spratt-fDghTk7Typw-unsplash.jpg"
-        alt="Soft pink and white floral background"
-        quality={100}
-        fill
-        priority
-        className="fixed inset-0 object-cover -z-20 opacity-20"
-        style={{
-          transform: `translateY(${offsetY * 0.5}px)`,
-        }}
-      />
       <header className="max-w-6xl mx-auto mb-8 text-center">
         <h1 className="text-3xl sm:text-4xl font-bold mb-2 animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent" style={{ fontFamily: 'var(--font-cookie)' }}>Did you  felt the same ?</h1>
         <p className="text-lg text-light-cream" style={{ fontFamily: 'var(--font-homemade-apple)' }}>
