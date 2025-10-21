@@ -28,7 +28,7 @@ const homemadeApple = Homemade_Apple({
 });
 
 export const metadata: Metadata = {
-  title: "Mahajan's Quotes",
+  title: "Echoes of Mahajan",
   description: "A collection of wisdom from great minds.",
 };
 
