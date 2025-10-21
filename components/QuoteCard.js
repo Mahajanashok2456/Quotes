@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { formatDate } from '../src/lib/utils.js'
 
 export default function QuoteCard({ quote, onCreateStory }) {
   const [showShareOptions, setShowShareOptions] = useState(false)
@@ -77,6 +78,30 @@ export default function QuoteCard({ quote, onCreateStory }) {
         >
           &mdash; {quote.author}
         </cite>
+
+        {/* Bottom Section with Timestamp and Action Buttons */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginTop: '16px',
+          paddingTop: '12px',
+          borderTop: '1px solid rgba(255, 255, 255, 0.1)'
+        }}>
+          {/* Timestamp */}
+          <p style={{
+            fontSize: '12px',
+            color: 'rgba(148, 163, 184, 0.8)',
+            margin: '0'
+          }}>
+            Added: {formatDate(quote.created_at)}
+          </p>
+
+          {/* Action Buttons Container (for future buttons) */}
+          <div style={{ display: 'flex', gap: '8px' }}>
+            {/* Space for future Like/Copy buttons */}
+          </div>
+        </div>
 
         {/* Action Buttons */}
         <div style={{
