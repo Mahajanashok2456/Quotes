@@ -1,33 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Echoes of Mahajan
+
+A collection of wisdom from great minds, built with Next.js 15, TypeScript, and MongoDB.
+
+## Features
+
+- View inspirational quotes with beautiful typography
+- Admin dashboard for managing quotes
+- User authentication with NextAuth.js
+- Responsive design with Tailwind CSS
+- Like functionality for quotes
+- Export quotes as images
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
+
+```bash
+npm install
+```
+
+Set up your environment variables by creating a `.env.local` file:
+
+```env
+MONGODB_URI=your_mongodb_connection_string
+NEXTAUTH_SECRET=your_nextauth_secret
+NEXTAUTH_URL=http://localhost:3000
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Admin Access
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To access the admin dashboard, you'll need to create an admin user:
+
+```bash
+npm run create-admin
+```
+
+Then visit [http://localhost:3000/manage-content-a3f8b1c9/login](http://localhost:3000/manage-content-a3f8b1c9/login) to log in with:
+- Email: admin@example.com
+- Password: mahajanadmin
+
+## Project Structure
+
+- `src/app` - Main application using Next.js App Router
+- `src/app/api` - API routes for quotes and authentication
+- `components` - Reusable React components
+- `src/models` - Mongoose models for MongoDB
+- `src/lib` - Utility functions and database connection
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about the technologies used in this project:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs) - styling with Tailwind
+- [MongoDB Documentation](https://docs.mongodb.com/) - database operations
+- [NextAuth.js Documentation](https://next-auth.js.org/) - authentication
 
 ## Deploy on Vercel
 
