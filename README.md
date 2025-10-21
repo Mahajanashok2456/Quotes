@@ -55,6 +55,25 @@ Then visit [http://localhost:3000/manage-content-a3f8b1c9/login](http://localhos
 - `src/models` - Mongoose models for MongoDB
 - `src/lib` - Utility functions and database connection
 
+## Technology Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS with `@tailwindcss/line-clamp`
+- **Authentication**: NextAuth.js
+- **Database**: MongoDB via Mongoose ODM
+- **Utilities**: bcryptjs for hashing, framer-motion for animations, html2canvas for screenshot capture
+
+## Deployment
+
+This application is designed for Vercel. Ensure you add the following Environment Variables to your Vercel project dashboard under Settings > Environment Variables:
+
+| Key | Value | Scope |
+|-----|-------|-------|
+| MONGODB_URI | Your Atlas connection string | Production, Preview, Development |
+| NEXTAUTH_SECRET | The long, random secret key | Production, Preview, Development |
+| NEXTAUTH_URL | Your public Vercel domain (e.g., https://quotes-app.vercel.app) | Production, Preview, Development |
+
 ## Learn More
 
 To learn more about the technologies used in this project:
