@@ -53,9 +53,9 @@ export default function AdminPage() {
       } else {
         setError(data.error || 'Failed to fetch quotes');
       }
-    } catch (err) {
+    } catch (_) {
       setError('Failed to fetch quotes');
-      console.error('Error fetching quotes:', err);
+      console.error('Error fetching quotes:', _);
     } finally {
       setLoading(false);
     }
@@ -105,7 +105,7 @@ export default function AdminPage() {
       } else {
         setError(data.error || `Failed to ${editingId ? 'update' : 'create'} quote`);
       }
-    } catch (err) {
+    } catch (_) {
       setError(`Failed to ${editingId ? 'update' : 'create'} quote`);
     }
   };

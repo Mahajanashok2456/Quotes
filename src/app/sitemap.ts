@@ -1,5 +1,4 @@
 import connectToDatabase from '@/lib/mongodb';
-import Quote from '@/models/Quote';
 
 export default async function sitemap() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://your-domain.com';
@@ -21,7 +20,7 @@ export default async function sitemap() {
     const quotes = await quotesCollection.find({}).toArray();
 
     // Generate sitemap entries for each quote
-    const quotePages = quotes.map((quote: any) => ({
+    const quotePages = quotes.map((quote: { _id: string; created_at?: string; createdAt?: string }) => ({
       url: `${baseUrl}/quotes/${quote._id}`,
       lastModified: new Date(quote.created_at || quote.createdAt || Date.now()),
       changeFrequency: 'weekly' as const,

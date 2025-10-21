@@ -19,11 +19,8 @@ export default function Home() {
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [offsetY, setOffsetY] = useState(0);
   const [selectedQuote, setSelectedQuote] = useState<Quote | null>(null);
   const [showWelcome, setShowWelcome] = useState(true);
-
-  const handleScroll = () => setOffsetY(window.pageYOffset);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -42,11 +39,6 @@ export default function Home() {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
     const fetchQuotes = async () => {
       try {
         const response = await fetch('/api/quotes');
@@ -57,7 +49,7 @@ export default function Home() {
         } else {
           setError(data.error || 'Failed to fetch quotes');
         }
-      } catch (err) {
+      } catch (_) {
         setError('Failed to fetch quotes');
       } finally {
         setLoading(false);
