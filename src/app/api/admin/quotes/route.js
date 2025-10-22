@@ -4,6 +4,38 @@ import { ObjectId } from 'mongodb';
 import { NextResponse } from 'next/server';
 
 /**
+ * GET /api/admin/quotes
+ * Retrieves all quotes
+ */
+export async function GET() {
+  try {
+    // Connect to the database
+    const { db } = await connectToDatabase();
+
+    // Fetch all quotes
+    const quotesCollection = db.collection('quotes');
+    const quotes = await quotesCollection.find({}).toArray();
+
+    // Convert to Quote instances and return
+    const quoteInstances = quotes.map(doc => Quote.fromDocument(doc));
+
+    return NextResponse.json({
+      success: true,
+      data: quoteInstances.map(q => q.toObject())
+    }, { status: 200 });
+
+  } catch (error) {
+    console.error('Error fetching quotes:', error);
+
+    return NextResponse.json({
+      success: false,
+      error: 'Failed to fetch quotes',
+      message: error.message
+    }, { status: 500 });
+  }
+}
+
+/**
  * POST /api/admin/quotes
  * Creates a new quote
  */

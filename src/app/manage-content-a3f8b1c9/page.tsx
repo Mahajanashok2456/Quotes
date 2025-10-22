@@ -11,6 +11,7 @@ interface Quote {
   author: string;
   font_family: string;
   font_color: string;
+  is_pinned: boolean;
   created_at: string;
 }
 
@@ -28,6 +29,7 @@ export default function AdminPage() {
   });
   const [editingId, setEditingId] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [pinningId, setPinningId] = useState<string | null>(null);
 
   // Redirect to login if not authenticated
   useEffect(() => {
@@ -45,9 +47,9 @@ export default function AdminPage() {
   const fetchQuotes = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/quotes');
+      const response = await fetch('/api/admin/quotes');
       const data = await response.json();
-      
+
       if (data.success) {
         setQuotes(data.data);
       } else {
@@ -159,6 +161,32 @@ export default function AdminPage() {
       font_color: '#000000'
     });
     setEditingId(null);
+  };
+
+  const handlePinToggle = async (quoteId: string) => {
+    setPinningId(quoteId);
+
+    try {
+      const response = await fetch(`/api/admin/quotes/${quoteId}/pin`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Refresh quotes
+        fetchQuotes();
+      } else {
+        setError(data.error || 'Failed to toggle pin');
+      }
+    } catch (err) {
+      setError('Failed to toggle pin');
+    } finally {
+      setPinningId(null);
+    }
   };
 
   // Show loading while checking authentication
@@ -352,6 +380,9 @@ export default function AdminPage() {
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                       Date Added
                     </th>
+                    <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      Pin
+                    </th>
                     <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                       Actions
                     </th>
@@ -388,6 +419,19 @@ export default function AdminPage() {
                         <div className="text-sm text-gray-900 dark:text-gray-100">
                           {formatDate(quote.created_at)}
                         </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-center">
+                        <button
+                          onClick={() => handlePinToggle(quote._id)}
+                          disabled={pinningId === quote._id}
+                          className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
+                            quote.is_pinned
+                              ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300 hover:bg-green-200 dark:hover:bg-green-800/50'
+                              : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                          } disabled:opacity-50`}
+                        >
+                          {pinningId === quote._id ? 'Pinning...' : quote.is_pinned ? '📍 Unpin' : '📌 Pin'}
+                        </button>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button

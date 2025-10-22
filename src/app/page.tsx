@@ -12,6 +12,7 @@ interface Quote {
   font_family: string;
   font_color: string;
   likes: number;
+  is_pinned: boolean;
   created_at: string;
 }
 
@@ -45,7 +46,13 @@ export default function Home() {
         const data = await response.json();
         
         if (data.success) {
-          setQuotes(data.data);
+          const sortedQuotes = data.data.sort((a: Quote, b: Quote) => {
+            if (a.is_pinned !== b.is_pinned) {
+              return b.is_pinned ? 1 : -1;
+            }
+            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+          });
+          setQuotes(sortedQuotes);
         } else {
           setError(data.error || 'Failed to fetch quotes');
         }

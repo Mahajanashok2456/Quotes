@@ -10,6 +10,7 @@ class Quote {
     this.font_family = data.font_family || 'Arial';
     this.font_color = data.font_color || '#000000';
     this.likes = data.likes || 0;
+    this.is_pinned = data.is_pinned || false;
     this.created_at = data.created_at || new Date();
   }
 
@@ -44,6 +45,10 @@ class Quote {
       errors.push('Created at must be a valid date');
     }
 
+    if (typeof this.is_pinned !== 'boolean') {
+      errors.push('Is pinned must be a boolean');
+    }
+
     return {
       isValid: errors.length === 0,
       errors
@@ -61,14 +66,15 @@ class Quote {
       font_family: this.font_family,
       font_color: this.font_color,
       likes: this.likes,
+      is_pinned: this.is_pinned,
       created_at: this.created_at
     };
-    
+
     // Include _id if it exists
     if (this._id) {
       obj._id = this._id;
     }
-    
+
     return obj;
   }
 
@@ -85,6 +91,7 @@ class Quote {
       font_family: doc.font_family,
       font_color: doc.font_color,
       likes: doc.likes,
+      is_pinned: doc.is_pinned,
       created_at: doc.created_at
     });
   }
