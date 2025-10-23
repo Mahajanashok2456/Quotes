@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Cookie, Homemade_Apple } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 import Providers from "./Providers";
 import AdminLoginModal from "./components/AdminLoginModal";
@@ -53,6 +54,10 @@ export default function RootLayout({
         <Providers>
           {children}
         </Providers>
+        <footer className="text-center py-4">
+          <Link href="/privacy" className="mr-4 text-xs text-gray-500 hover:underline">Privacy Policy</Link>
+          <Link href="/terms" className="text-xs text-gray-500 hover:underline">Terms of Service</Link>
+        </footer>
         <AdminLoginModal />
       </body>
     </html>
