@@ -166,7 +166,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
           >
             <motion.div
               // This is the modal content card
@@ -175,16 +175,16 @@ export default function Home() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.7, opacity: 0 }}
               transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-              className="relative bg-gray-800 rounded-xl p-8 md:p-12 w-full max-w-2xl text-center shadow-2xl max-h-[85vh] flex flex-col"
+              className="relative bg-light-cream border border-dark-maroon rounded-lg shadow-xl p-8 md:p-12 w-full max-w-5xl text-center max-h-[85vh] flex flex-col"
               style={{
                 fontFamily: selectedQuote.font_family,
-                color: selectedQuote.font_color,
+                color: selectedQuote.font_color || '#000000',
               }}
             >
               {/* Close Button */}
               <button 
                 onClick={handleCloseModal} 
-                className="absolute top-4 right-4 text-white/50 hover:text-white transition-colors"
+                className="absolute top-4 right-4 text-dark-maroon/50 hover:text-dark-maroon transition-colors"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -194,14 +194,14 @@ export default function Home() {
               {/* Scrollable content container */}
               <div className="overflow-y-auto pr-4 flex-grow">
                 {/* Modal Content */}
-                <p className="text-3xl md:text-5xl font-bold leading-tight mb-6 whitespace-pre-wrap">
+                <p className="text-2xl md:text-3xl font-bold leading-tight mb-6 whitespace-pre-wrap break-words">
                   &quot;{selectedQuote.text}&quot;
                 </p>
-                <p className="text-xl md:text-2xl opacity-80">— {selectedQuote.author}</p>
+                <p className="text-xl md:text-2xl text-dark-maroon">— {selectedQuote.author}</p>
               </div>
 
               {/* Action buttons */}
-              <div className="flex justify-center items-center gap-6 mt-8 pt-4 border-t border-white/10">
+              <div className="flex justify-center items-center gap-6 mt-8 pt-4 border-t border-dark-maroon/20">
                  {/* You can reuse your like and copy buttons here */}
               </div>
             </motion.div>
