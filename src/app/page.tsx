@@ -56,7 +56,7 @@ export default function Home() {
         } else {
           setError(data.error || 'Failed to fetch quotes');
         }
-      } catch (_e) {
+      } catch (_) {
         setError('Failed to fetch quotes');
       } finally {
         setLoading(false);

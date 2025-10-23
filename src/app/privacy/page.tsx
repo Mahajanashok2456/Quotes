@@ -25,7 +25,7 @@ export default function PrivacyPolicy() {
         <p className="text-sm mb-8">You can manage or disable cookies through your browser settings, but this may affect the functionality of the site.</p>
 
         <h2 className="text-2xl font-semibold mb-4 text-soft-peach">Google AdSense</h2>
-        <p className="mb-4">Mahajan&apos;s Quotes uses Google AdSense to display advertisements. Google AdSense may use cookies and other technologies to serve personalized ads based on your interests and online activity. For more information on how Google handles your data, please review Google's Privacy Policy at <a href="https://policies.google.com/privacy" className="text-slate-blue hover:underline">Google Privacy Policy</a>.</p>
+        <p className="mb-4">Mahajan&apos;s Quotes uses Google AdSense to display advertisements. Google AdSense may use cookies and other technologies to serve personalized ads based on your interests and online activity. For more information on how Google handles your data, please review Google&apos;s Privacy Policy at <a href="https://policies.google.com/privacy" className="text-slate-blue hover:underline">Google Privacy Policy</a>.</p>
 
         <h2 className="text-2xl font-semibold mb-4 text-soft-peach">Contact Us</h2>
         <p className="mb-8">If you have any questions about this Privacy Policy, please contact us at **ashoroshan78@gmail.com**.</p>

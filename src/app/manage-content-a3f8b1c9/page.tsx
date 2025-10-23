@@ -55,10 +55,8 @@ export default function AdminPage() {
       } else {
         setError(data.error || 'Failed to fetch quotes');
       }
-    } catch (e) {
-      // eslint-disable-next-line no-unused-vars
+    } catch (_) {
       setError('Failed to fetch quotes');
-      console.error('Error fetching quotes:', e);
     } finally {
       setLoading(false);
     }
@@ -108,8 +106,7 @@ export default function AdminPage() {
       } else {
         setError(data.error || `Failed to ${editingId ? 'update' : 'create'} quote`);
       }
-    } catch (e) {
-      // eslint-disable-next-line no-unused-vars
+    } catch (_) {
       setError(`Failed to ${editingId ? 'update' : 'create'} quote`);
     }
   };
@@ -148,8 +145,7 @@ export default function AdminPage() {
       } else {
         setError(data.error || 'Failed to delete quote');
       }
-    } catch (e) {
-      // eslint-disable-next-line no-unused-vars
+    } catch (_) {
       setError('Failed to delete quote');
     } finally {
       setDeletingId(null);
@@ -185,8 +181,7 @@ export default function AdminPage() {
       } else {
         setError(data.error || 'Failed to toggle pin');
       }
-    } catch (e) {
-      // eslint-disable-next-line no-unused-vars
+    } catch (_) {
       setError('Failed to toggle pin');
     } finally {
       setPinningId(null);
