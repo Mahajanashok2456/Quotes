@@ -55,7 +55,7 @@ export default function AdminPage() {
       } else {
         setError(data.error || 'Failed to fetch quotes');
       }
-    } catch (_) {
+    } catch {
       setError('Failed to fetch quotes');
     } finally {
       setLoading(false);
@@ -106,7 +106,7 @@ export default function AdminPage() {
       } else {
         setError(data.error || `Failed to ${editingId ? 'update' : 'create'} quote`);
       }
-    } catch (_) {
+    } catch {
       setError(`Failed to ${editingId ? 'update' : 'create'} quote`);
     }
   };
@@ -145,7 +145,7 @@ export default function AdminPage() {
       } else {
         setError(data.error || 'Failed to delete quote');
       }
-    } catch (_) {
+    } catch {
       setError('Failed to delete quote');
     } finally {
       setDeletingId(null);
@@ -181,7 +181,7 @@ export default function AdminPage() {
       } else {
         setError(data.error || 'Failed to toggle pin');
       }
-    } catch (_) {
+    } catch {
       setError('Failed to toggle pin');
     } finally {
       setPinningId(null);
