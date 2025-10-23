@@ -19,14 +19,12 @@ export default function QuoteCard({ quote, onCreateStory }) {
         await navigator.clipboard.writeText(shareData.text)
         alert('Quote copied to clipboard!')
       }
-    } catch (_) {
-      // eslint-disable-next-line no-unused-vars
+    } catch {
       // Fallback to clipboard
       try {
         await navigator.clipboard.writeText(shareData.text)
         alert('Quote copied to clipboard!')
-      } catch (_) {
-        // eslint-disable-next-line no-unused-vars
+      } catch {
         // Silently handle clipboard errors
       }
     }
