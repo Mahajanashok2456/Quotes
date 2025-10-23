@@ -53,6 +53,26 @@ export default function RootLayout({
           crossOrigin="anonymous" 
           strategy="lazyOnload" 
         />
+        {/* 1. The main G-Tag library script */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-C4LQS50DD3"
+        />
+
+        {/* 2. The G-Tag initialization script */}
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-C4LQS50DD3');
+            `,
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${cookie.variable} ${homemadeApple.variable} antialiased`}
