@@ -56,8 +56,7 @@ export default function Home() {
         } else {
           setError(data.error || 'Failed to fetch quotes');
         }
-      } catch (e) {
-        // eslint-disable-next-line no-unused-vars
+      } catch (_e) {
         setError('Failed to fetch quotes');
       } finally {
         setLoading(false);
@@ -259,7 +258,7 @@ function QuoteCard({ quote, onCardClick }: { quote: Quote; onCardClick: (quote: 
       await navigator.clipboard.writeText(quote.text);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000); // Reset copied status after 2 seconds
-    } catch (error) {
+    } catch {
       alert('Failed to copy quote to clipboard');
     }
   };
