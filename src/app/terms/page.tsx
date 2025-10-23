@@ -4,7 +4,7 @@ export default function TermsPage() {
       <div className="container mx-auto max-w-4xl px-4 py-12 text-light-cream">
         <h1 className="text-3xl font-bold mb-6 text-soft-peach">Terms of Service</h1>
         <p className="text-sm mb-4"><strong>Effective Date:</strong> October 2025</p>
-        <p className="text-sm mb-8">Welcome to Mahajan&apos;s Quotes (<a href="https://quotes-gold-mu.vercel.app/" className="text-slate-blue hover:underline">https://quotes-gold-mu.vercel.app/</a>). By accessing or using this website, you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you do not agree to these Terms, please do not use the site.</p>
+        <p className="text-sm mb-8">Welcome to Mahajan&apos;s Quotes (<a href="https://quotes-website-self.vercel.app/" className="text-slate-blue hover:underline">https://quotes-website-self.vercel.app/</a>). By accessing or using this website, you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you do not agree to these Terms, please do not use the site.</p>
 
         <h2 className="text-2xl font-semibold mb-4 text-soft-peach">Use of the Website</h2>
         <p className="mb-4">Mahajan&apos;s Quotes provides inspirational quotes for personal use, sharing, and inspiration. The content on this site is provided &quot;as is&quot; without any warranties or guarantees.</p>

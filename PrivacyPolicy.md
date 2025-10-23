@@ -4,7 +4,7 @@
 
 **Last Updated:** October 2025
 
-Welcome to Mahajan's Quotes (https://quotes-gold-mu.vercel.app/). This Privacy Policy explains how we collect, use, and protect your information when you visit our website.
+Welcome to Mahajan's Quotes (https://quotes-website-self.vercel.app/). This Privacy Policy explains how we collect, use, and protect your information when you visit our website.
 
 ## Information We Collect
 
