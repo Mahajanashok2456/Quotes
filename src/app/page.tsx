@@ -56,7 +56,8 @@ export default function Home() {
         } else {
           setError(data.error || 'Failed to fetch quotes');
         }
-      } catch (_) {
+      } catch (e) {
+        // eslint-disable-next-line no-unused-vars
         setError('Failed to fetch quotes');
       } finally {
         setLoading(false);
