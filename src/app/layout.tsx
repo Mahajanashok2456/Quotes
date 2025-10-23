@@ -69,6 +69,13 @@ export default function RootLayout({
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
 
+              // START: Add the Consent Mode default settings
+              gtag('consent', 'default', {
+                'ad_storage': 'denied',
+                'analytics_storage': 'denied'
+              });
+              // END: Add the Consent Mode default settings
+
               gtag('config', 'G-C4LQS50DD3');
             `,
           }}
