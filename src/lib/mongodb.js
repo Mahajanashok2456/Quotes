@@ -31,7 +31,10 @@ async function connectToDatabase() {
     // Make the connection using the URI and options
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
       console.log("MongoDB connected successfully with extended timeout."); // Add log
-      return mongoose;
+      // Return an object with the native MongoDB database instance
+      return {
+        db: mongoose.connection.db
+      };
     }).catch(err => {
       console.error("MongoDB connection error:", err); // Log connection errors
       cached.promise = null; // Reset promise on error
