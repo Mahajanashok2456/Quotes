@@ -12,30 +12,40 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
+        console.log('AUTHORIZE: Attempting login for:', credentials?.email); // Log email attempt
+        
         if (!credentials?.email || !credentials?.password) {
+          console.log('AUTHORIZE: Missing email or password');
           return null;
         }
 
         try {
           await connectToDatabase();
+          console.log('AUTHORIZE: Database connected.'); // Log DB connection
           
           const userDoc: any = await User.findOne({ email: credentials.email });
+          console.log('AUTHORIZE: User found in DB:', userDoc ? userDoc.email : 'No user found'); // Log user found/not found
           
           if (!userDoc) {
+            console.log('AUTHORIZE: No user found, returning null.');
             return null;
           }
           
           const isValid = await userDoc.comparePassword(credentials.password);
+          console.log('AUTHORIZE: Password match result:', isValid); // Log password comparison result
           
           if (!isValid) {
+            console.log('AUTHORIZE: Passwords do not match, returning null.');
             return null;
           }
           
+          console.log('AUTHORIZE: Passwords match, returning user.');
           return {
             id: userDoc._id.toString(),
             email: userDoc.email,
           };
-        } catch {
+        } catch (error) {
+          console.error('AUTHORIZE: Error during authorization:', error); // Log any errors
           return null;
         }
       }
