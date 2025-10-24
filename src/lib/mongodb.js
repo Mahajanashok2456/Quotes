@@ -45,24 +45,20 @@ async function connectToDatabase() {
   
   try {
     cached.conn = await cached.promise;
+    
+    // 🛑 MOVE THE FINAL RETURN STATEMENT HERE (Only executed on SUCCESS)
+    return { 
+      db: cached.conn.connection.db, // Extracts the native database instance
+      mongoose: cached.conn 
+    };
+    
   } catch (error) {
-     cached.promise = null; // Ensure promise is reset if connection fails
-     throw error; // Re-throw error after logging
+    // Executes only on FAILURE (e.g., bad auth, timeout)
+    cached.promise = null; 
+    throw error; // Re-throws the error, stopping execution cleanly
   }
-  
-  // 🛑 ADD THIS CRITICAL CHECK:
-  if (!cached.conn) {
-    // This should theoretically be unreachable if an error was thrown above, 
-    // but it serves as a final safeguard.
-    throw new Error("Failed to establish database connection.");
-  }
-  // ------------------------------------
 
-  // Ensure we return the correct structure for new connections
-  return { 
-    db: cached.conn.connection.db,
-    mongoose: cached.conn 
-  };
+  // DELETE the redundant code that used to be here!
 }
 
 // Unused function - keeping for backward compatibility
