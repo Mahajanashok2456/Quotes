@@ -49,6 +49,14 @@ async function connectToDatabase() {
      throw error; // Re-throw error after logging
   }
   
+  // 🛑 ADD THIS CRITICAL CHECK:
+  if (!cached.conn) {
+    // This should theoretically be unreachable if an error was thrown above, 
+    // but it serves as a final safeguard.
+    throw new Error("Failed to establish database connection.");
+  }
+  // ------------------------------------
+
   return { 
     db: cached.conn.connection.db,
     mongoose: cached.conn 
