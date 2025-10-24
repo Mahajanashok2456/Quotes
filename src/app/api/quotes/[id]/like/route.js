@@ -1,83 +1,66 @@
-import connectToDatabase from '@/lib/mongodb';
-import { ObjectId } from 'mongodb';
-import { NextResponse } from 'next/server';
+import connectToDatabase from "@/lib/mongodb";
+import { ObjectId } from "mongodb";
 
-/**
- * PUT /api/quotes/:id/like
- * Increments the like count for a quote
- */
-export async function PUT(request, context) {
+export async function PUT(request, { params }) {
+  const { id } = params;
+
+  if (!id) {
+    return new Response(
+      JSON.stringify({ 
+        success: false, 
+        message: "Quote ID is required" 
+      }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
+  if (!ObjectId.isValid(id)) {
+    return new Response(
+      JSON.stringify({ 
+        success: false, 
+        message: "Invalid quote ID format" 
+      }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
   try {
-    console.log('Received like request with context:', context);
-    
-    const { params } = context;
-    console.log('Params:', params);
-    
-    if (!params) {
-      console.log('No params provided');
-      return NextResponse.json({ 
-        success: false,
-        message: 'No parameters provided' 
-      }, { status: 400 });
-    }
-    
-    const { id } = params;
-    console.log('ID from params:', id);
-    
-    // Backend guard: Check if ID is provided and valid
-    if (!id || id === 'undefined' || id === ':id') {
-      console.log('Invalid quote ID provided:', id);
-      return NextResponse.json({ 
-        success: false,
-        message: 'Invalid quote ID provided' 
-      }, { status: 400 });
-    }
-    
-    // Validate ID format
-    if (!ObjectId.isValid(id)) {
-      console.log('Invalid ObjectId format:', id);
-      return NextResponse.json({
-        success: false,
-        error: 'Invalid quote ID format'
-      }, { status: 400 });
-    }
-    
-    // Connect to the database
     const { db } = await connectToDatabase();
-    
-    // Update quote in database
-    const quotesCollection = db.collection('quotes');
+    const quotesCollection = db.collection("quotes");
+
     const result = await quotesCollection.updateOne(
       { _id: new ObjectId(id) },
       { $inc: { likes: 1 } }
     );
-    
-    // Check if quote was found and updated
+
     if (result.matchedCount === 0) {
-      return NextResponse.json({
-        success: false,
-        error: 'Quote not found'
-      }, { status: 404 });
+      return new Response(
+        JSON.stringify({ 
+          success: false, 
+          message: "Quote not found" 
+        }),
+        { status: 404, headers: { "Content-Type": "application/json" } }
+      );
     }
-    
-    // Fetch updated quote
+
     const updatedQuote = await quotesCollection.findOne({ _id: new ObjectId(id) });
-    
-    // Return successful response
-    return NextResponse.json({
-      success: true,
-      data: {
-        likes: updatedQuote.likes || 0
-      }
-    }, { status: 200 });
-    
-  } catch (error) {
-    console.error('Error liking quote:', error);
-    
-    return NextResponse.json({
-      success: false,
-      error: 'Failed to like quote',
-      message: error.message
-    }, { status: 500 });
+
+    return new Response(
+      JSON.stringify({ 
+        success: true, 
+        data: { 
+          likes: updatedQuote.likes 
+        } 
+      }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  } catch {
+    return new Response(
+      JSON.stringify({ 
+        success: false, 
+        message: "Failed to update likes" 
+      }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
   }
 }

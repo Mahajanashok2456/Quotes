@@ -1,7 +1,7 @@
 import connectToDatabase from '@/lib/mongodb';
 
 export default async function sitemap() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://your-domain.com';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://quotes-website-self.vercel.app/';
 
   // Static pages
   const staticPages = [
@@ -28,8 +28,7 @@ export default async function sitemap() {
     }));
 
     return [...staticPages, ...quotePages];
-  } catch (error) {
-    console.error('Error generating sitemap:', error);
+  } catch {
     // Return only static pages if quotes fetch fails
     return staticPages;
   }

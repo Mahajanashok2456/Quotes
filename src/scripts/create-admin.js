@@ -1,40 +1,30 @@
-import dotenv from 'dotenv';
-import path from 'path';
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const bcrypt = require('bcrypt');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const connectToDatabase = require('../../lib/mongodb').default;
 
-// Load .env.local file
-dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
-
-import { connectToMongoose } from '../lib/mongodb.js';
-import User from '../models/User.js';
-
-async function createAdminUser() {
+async function createAdmin() {
   try {
-    // Connect to MongoDB
-    await connectToMongoose();
+    const { db } = await connectToDatabase();
     
-    // Check if admin user already exists
-    const existingUser = await User.findOne({ email: 'admin@example.com' });
+    const adminCollection = db.collection('admins');
+    const existingAdmin = await adminCollection.findOne({ email: 'admin@example.com' });
     
-    if (existingUser) {
-      console.log('Admin user already exists');
+    if (existingAdmin) {
       process.exit(0);
     }
     
-    // Create admin user
-    const adminUser = new User({
+    const hashedPassword = await bcrypt.hash('admin123', 12);
+    await adminCollection.insertOne({
       email: 'admin@example.com',
-      password: 'mahajanadmin'
+      password: hashedPassword,
+      created_at: new Date(),
     });
     
-    await adminUser.save();
-    
-    console.log('Admin user created successfully');
-    console.log('Email:', adminUser.email);
     process.exit(0);
-  } catch (error) {
-    console.error('Error creating admin user:', error);
+  } catch {
     process.exit(1);
   }
 }
 
-createAdminUser();
+createAdmin();
