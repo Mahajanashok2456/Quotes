@@ -2,13 +2,24 @@ import connectToDatabase from '@/lib/mongodb';
 import Quote from '@/models/Quote';
 import { ObjectId } from 'mongodb';
 import { NextResponse } from 'next/server';
+import { rateLimit } from '@/lib/rateLimiter';
+import DOMPurify from 'dompurify';
 
 /**
  * GET /api/admin/quotes
  * Retrieves all quotes
  */
-export async function GET() {
+export async function GET(request) {
   try {
+    // Rate limiting
+    const rateLimitResult = rateLimit(request);
+    if (!rateLimitResult.success) {
+      return NextResponse.json({
+        success: false,
+        error: rateLimitResult.error
+      }, { status: 429 });
+    }
+
     // Connect to the database
     const { db } = await connectToDatabase();
 
@@ -28,7 +39,7 @@ export async function GET() {
     return NextResponse.json({
       success: false,
       error: 'Failed to fetch quotes',
-      message: error.message
+      message: process.env.NODE_ENV === 'production' ? 'Internal server error' : error.message
     }, { status: 500 });
   }
 }
@@ -39,14 +50,34 @@ export async function GET() {
  */
 export async function POST(request) {
   try {
+    // Rate limiting
+    const rateLimitResult = rateLimit(request);
+    if (!rateLimitResult.success) {
+      return NextResponse.json({
+        success: false,
+        error: rateLimitResult.error
+      }, { status: 429 });
+    }
+
     // Connect to the database
     const { db } = await connectToDatabase();
 
     // Get request body
     const body = await request.json();
 
+    // Sanitize input
+    const sanitizedBody = {
+      text: DOMPurify.sanitize(body.text || ''),
+      author: DOMPurify.sanitize(body.author || ''),
+      font_family: DOMPurify.sanitize(body.font_family || 'Arial'),
+      font_color: DOMPurify.sanitize(body.font_color || '#000000'),
+      likes: body.likes || 0,
+      is_pinned: body.is_pinned || false,
+      created_at: body.created_at || new Date()
+    };
+
     // Create new quote instance
-    const quote = new Quote(body);
+    const quote = new Quote(sanitizedBody);
 
     // Validate quote data
     const validationResult = await quote.validate();
@@ -73,11 +104,11 @@ export async function POST(request) {
     
   } catch (error) {
     console.error('Error creating quote:', error);
-    
+
     return NextResponse.json({
       success: false,
       error: 'Failed to create quote',
-      message: error.message
+      message: process.env.NODE_ENV === 'production' ? 'Internal server error' : error.message
     }, { status: 500 });
   }
 }
@@ -88,6 +119,15 @@ export async function POST(request) {
  */
 export async function PUT(request) {
   try {
+    // Rate limiting
+    const rateLimitResult = rateLimit(request);
+    if (!rateLimitResult.success) {
+      return NextResponse.json({
+        success: false,
+        error: rateLimitResult.error
+      }, { status: 429 });
+    }
+
     // Connect to the database
     const { db } = await connectToDatabase();
 
@@ -105,8 +145,19 @@ export async function PUT(request) {
       }, { status: 400 });
     }
 
+    // Sanitize input
+    const sanitizedQuoteData = {
+      text: DOMPurify.sanitize(quoteData.text || ''),
+      author: DOMPurify.sanitize(quoteData.author || ''),
+      font_family: DOMPurify.sanitize(quoteData.font_family || 'Arial'),
+      font_color: DOMPurify.sanitize(quoteData.font_color || '#000000'),
+      likes: quoteData.likes || 0,
+      is_pinned: quoteData.is_pinned || false,
+      created_at: quoteData.created_at || new Date()
+    };
+
     // Create quote instance with updated data
-    const quote = new Quote(quoteData);
+    const quote = new Quote(sanitizedQuoteData);
 
     // Validate quote data
     const validationResult = await quote.validate();
@@ -150,7 +201,7 @@ export async function PUT(request) {
     return NextResponse.json({
       success: false,
       error: 'Failed to update quote',
-      message: error.message
+      message: process.env.NODE_ENV === 'production' ? 'Internal server error' : error.message
     }, { status: 500 });
   }
 }
@@ -161,6 +212,15 @@ export async function PUT(request) {
  */
 export async function DELETE(request) {
   try {
+    // Rate limiting
+    const rateLimitResult = rateLimit(request);
+    if (!rateLimitResult.success) {
+      return NextResponse.json({
+        success: false,
+        error: rateLimitResult.error
+      }, { status: 429 });
+    }
+
     // Connect to the database
     const { db } = await connectToDatabase();
 
@@ -200,7 +260,7 @@ export async function DELETE(request) {
     return NextResponse.json({
       success: false,
       error: 'Failed to delete quote',
-      message: error.message
+      message: process.env.NODE_ENV === 'production' ? 'Internal server error' : error.message
     }, { status: 500 });
   }
 }
