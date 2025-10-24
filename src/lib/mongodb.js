@@ -18,7 +18,10 @@ if (!cached) {
 
 async function connectToDatabase() {
   if (cached.conn) {
-    return cached.conn;
+    return { 
+      db: cached.conn.connection.db,
+      mongoose: cached.conn 
+    };
   }
 
   if (!cached.promise) {
@@ -31,11 +34,7 @@ async function connectToDatabase() {
     // Make the connection using the URI and options
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
       console.log("MongoDB connected successfully with extended timeout."); // Add log
-      // Return an object with the native MongoDB database instance
-      return {
-        db: mongoose.connection.db,
-        mongoose: mongoose
-      };
+      return mongoose;
     }).catch(err => {
       console.error("MongoDB connection error:", err); // Log connection errors
       cached.promise = null; // Reset promise on error
@@ -50,7 +49,10 @@ async function connectToDatabase() {
      throw error; // Re-throw error after logging
   }
   
-  return cached.conn;
+  return { 
+    db: cached.conn.connection.db,
+    mongoose: cached.conn 
+  };
 }
 
 // Unused function - keeping for backward compatibility
