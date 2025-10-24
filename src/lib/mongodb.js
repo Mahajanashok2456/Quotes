@@ -9,10 +9,11 @@ if (!MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
 }
 
-let cached = global.mongo;
+// Use global variable to maintain a cached connection
+let cached = global.mongoose;
 
 if (!cached) {
-  cached = global.mongo = { conn: null, promise: null, mongoose: null };
+  cached = global.mongoose = { conn: null, promise: null };
 }
 
 async function connectToDatabase() {
@@ -21,27 +22,34 @@ async function connectToDatabase() {
   }
 
   if (!cached.promise) {
+    // Define connection options WITH the increased timeout
     const opts = {
-      serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
+      bufferCommands: false, // Recommended for modern Mongoose
+      serverSelectionTimeoutMS: 30000 // <-- ENSURE THIS IS SET TO 30 SECONDS
     };
-    
-    cached.promise = MongoClient.connect(MONGODB_URI, opts).then((client) => {
-      return {
-        client,
-        db: client.db(DATABASE_NAME),
-      };
+
+    // Make the connection using the URI and options
+    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+      console.log("MongoDB connected successfully with extended timeout."); // Add log
+      return mongoose;
+    }).catch(err => {
+      console.error("MongoDB connection error:", err); // Log connection errors
+      cached.promise = null; // Reset promise on error
+      throw err; // Re-throw error to indicate failure
     });
   }
-
+  
   try {
     cached.conn = await cached.promise;
-    return cached.conn;
   } catch (error) {
-    cached.promise = null;
-    throw error;
+     cached.promise = null; // Ensure promise is reset if connection fails
+     throw error; // Re-throw error after logging
   }
+  
+  return cached.conn;
 }
 
+// Unused function - keeping for backward compatibility
 async function connectToMongoose() {
   if (cached.mongoose && cached.mongoose.connection.readyState === 1) {
     return cached.mongoose;
