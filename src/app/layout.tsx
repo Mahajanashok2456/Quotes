@@ -88,7 +88,11 @@ export default function RootLayout({
         <div className="overlay"></div>
         <header className="bg-gradient-to-r from-purple-900 to-indigo-800 p-4 shadow-lg">
           <div className="container mx-auto">
-            <Link href="/" className="text-2xl font-bold text-white hover:text-soft-peach transition-colors">
+            <Link 
+              href="/" 
+              className="text-2xl font-bold text-white hover:text-soft-peach transition-colors"
+              style={{ fontFamily: 'var(--font-cookie)' }}
+            >
               Echoes of Mahajan
             </Link>
           </div>
