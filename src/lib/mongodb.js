@@ -45,16 +45,21 @@ async function connectToDatabase() {
   
   try {
     cached.conn = await cached.promise;
-    
+
+    // Ensure the database object is available
+    if (!cached.conn.connection.db) {
+      throw new Error('Database connection not fully established');
+    }
+
     // 🛑 MOVE THE FINAL RETURN STATEMENT HERE (Only executed on SUCCESS)
-    return { 
+    return {
       db: cached.conn.connection.db, // Extracts the native database instance
-      mongoose: cached.conn 
+      mongoose: cached.conn
     };
-    
+
   } catch (error) {
     // Executes only on FAILURE
-    cached.promise = null; 
+    cached.promise = null;
     throw error; // Re-throws the error, stopping execution cleanly
   }
 

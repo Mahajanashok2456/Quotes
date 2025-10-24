@@ -1,16 +1,21 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const bcrypt = require('bcrypt');
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const connectToDatabase = require('../../lib/mongodb').default;
+import dotenv from 'dotenv';
+import path from 'path';
+
+// Load .env.local file
+dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
+
+import bcrypt from 'bcryptjs';
 
 async function createAdmin() {
   try {
+    const { default: connectToDatabase } = await import('../lib/mongodb.js');
     const { db } = await connectToDatabase();
     
     const adminCollection = db.collection('admins');
     const existingAdmin = await adminCollection.findOne({ email: 'admin@example.com' });
     
     if (existingAdmin) {
+      console.log('Admin already exists');
       process.exit(0);
     }
     
@@ -21,8 +26,10 @@ async function createAdmin() {
       created_at: new Date(),
     });
     
+    console.log('Admin created successfully');
     process.exit(0);
-  } catch {
+  } catch (error) {
+    console.error('Error creating admin:', error);
     process.exit(1);
   }
 }

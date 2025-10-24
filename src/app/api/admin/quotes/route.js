@@ -16,12 +16,10 @@ export async function GET() {
     const quotesCollection = db.collection('quotes');
     const quotes = await quotesCollection.find({}).toArray();
 
-    // Convert to Quote instances and return
-    const quoteInstances = quotes.map(doc => Quote.fromDocument(doc));
-
+    // Return the quotes as is
     return NextResponse.json({
       success: true,
-      data: quoteInstances.map(q => q.toObject())
+      data: quotes
     }, { status: 200 });
 
   } catch (error) {
@@ -43,20 +41,20 @@ export async function POST(request) {
   try {
     // Connect to the database
     const { db } = await connectToDatabase();
-    
+
     // Get request body
     const body = await request.json();
-    
+
     // Create new quote instance
     const quote = new Quote(body);
-    
+
     // Validate quote data
-    const validation = quote.validate();
-    if (!validation.isValid) {
+    const validationResult = await quote.validate();
+    if (validationResult && validationResult.errors && Object.keys(validationResult.errors).length > 0) {
       return NextResponse.json({
         success: false,
         error: 'Validation failed',
-        message: validation.errors
+        message: Object.values(validationResult.errors).map(err => err.message)
       }, { status: 400 });
     }
     
@@ -111,20 +109,22 @@ export async function PUT(request) {
     const quote = new Quote(quoteData);
 
     // Validate quote data
-    const validation = quote.validate();
-    if (!validation.isValid) {
+    const validationResult = await quote.validate();
+    if (validationResult && validationResult.errors && Object.keys(validationResult.errors).length > 0) {
       return NextResponse.json({
         success: false,
         error: 'Validation failed',
-        message: validation.errors
+        message: Object.values(validationResult.errors).map(err => err.message)
       }, { status: 400 });
     }
 
     // Update quote in database
     const quotesCollection = db.collection('quotes');
+    const quoteObj = quote.toObject();
+    delete quoteObj._id; // Exclude _id from update
     const result = await quotesCollection.updateOne(
       { _id: new ObjectId(id) },
-      { $set: quote.toObject() }
+      { $set: quoteObj }
     );
 
     // Check if quote was found and updated
@@ -140,7 +140,7 @@ export async function PUT(request) {
       success: true,
       data: {
         _id: id,
-        ...quote.toObject()
+        ...quoteObj
       }
     }, { status: 200 });
 

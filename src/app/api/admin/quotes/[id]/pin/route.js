@@ -13,7 +13,7 @@ export async function PUT(request, { params }) {
     const { db } = await connectToDatabase();
 
     // Get quote ID from URL params
-    const { id } = params;
+    const { id } = await params;
 
     // Validate ID format
     if (!id || !ObjectId.isValid(id)) {
@@ -35,30 +35,19 @@ export async function PUT(request, { params }) {
       }, { status: 404 });
     }
 
-    // Create Quote instance and toggle is_pinned
-    const quote = Quote.fromDocument(existingQuote);
-    quote.is_pinned = !quote.is_pinned;
-
-    // Validate the updated quote
-    const validation = quote.validate();
-    if (!validation.isValid) {
-      return NextResponse.json({
-        success: false,
-        error: 'Validation failed',
-        message: validation.errors
-      }, { status: 400 });
-    }
+    // Toggle is_pinned
+    const updatedIsPinned = !existingQuote.is_pinned;
 
     // Update the quote in the database
     await quotesCollection.updateOne(
       { _id: new ObjectId(id) },
-      { $set: { is_pinned: quote.is_pinned } }
+      { $set: { is_pinned: updatedIsPinned } }
     );
 
     // Return the updated quote
     return NextResponse.json({
       success: true,
-      data: quote.toObject()
+      data: { ...existingQuote, is_pinned: updatedIsPinned }
     }, { status: 200 });
 
   } catch (error) {

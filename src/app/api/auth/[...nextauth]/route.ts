@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import bcrypt from "bcryptjs"
 import connectToDatabase from "@/lib/mongodb"
 import User from "@/models/User"
 
@@ -13,32 +14,33 @@ const handler = NextAuth({
       },
       async authorize(credentials) {
         console.log('AUTHORIZE: Attempting login for:', credentials?.email); // Log email attempt
-        
+
         if (!credentials?.email || !credentials?.password) {
           console.log('AUTHORIZE: Missing email or password');
           return null;
         }
 
         try {
-          await connectToDatabase();
+          const { db } = await connectToDatabase();
           console.log('AUTHORIZE: Database connected.'); // Log DB connection
-          
-          const userDoc: any = await User.findOne({ email: credentials.email });
+
+          const adminCollection = db.collection('admins');
+          const userDoc = await adminCollection.findOne({ email: credentials.email });
           console.log('AUTHORIZE: User found in DB:', userDoc ? userDoc.email : 'No user found'); // Log user found/not found
-          
+
           if (!userDoc) {
             console.log('AUTHORIZE: No user found, returning null.');
             return null;
           }
-          
-          const isValid = await userDoc.comparePassword(credentials.password);
+
+          const isValid = await bcrypt.compare(credentials.password, userDoc.password);
           console.log('AUTHORIZE: Password match result:', isValid); // Log password comparison result
-          
+
           if (!isValid) {
             console.log('AUTHORIZE: Passwords do not match, returning null.');
             return null;
           }
-          
+
           console.log('AUTHORIZE: Passwords match, returning user.');
           return {
             id: userDoc._id.toString(),
