@@ -18,6 +18,7 @@ if (!cached) {
 
 async function connectToDatabase() {
   if (cached.conn) {
+    // Ensure we return the correct structure even for cached connections
     return { 
       db: cached.conn.connection.db,
       mongoose: cached.conn 
@@ -57,6 +58,7 @@ async function connectToDatabase() {
   }
   // ------------------------------------
 
+  // Ensure we return the correct structure for new connections
   return { 
     db: cached.conn.connection.db,
     mongoose: cached.conn 
