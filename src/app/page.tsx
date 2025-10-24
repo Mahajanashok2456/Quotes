@@ -258,7 +258,7 @@ function QuoteCard({ quote, onCardClick }: { quote: Quote; onCardClick: (quote: 
       await navigator.clipboard.writeText(quote.text);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000); // Reset copied status after 2 seconds
-    } catch {
+    } catch (error) {
       alert('Failed to copy quote to clipboard');
     }
   };
