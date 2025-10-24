@@ -21,7 +21,11 @@ async function connectToDatabase() {
   }
 
   if (!cached.promise) {
-    cached.promise = MongoClient.connect(MONGODB_URI).then((client) => {
+    const opts = {
+      serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
+    };
+    
+    cached.promise = MongoClient.connect(MONGODB_URI, opts).then((client) => {
       return {
         client,
         db: client.db(DATABASE_NAME),
@@ -46,6 +50,7 @@ async function connectToMongoose() {
   try {
     const opts = {
       bufferCommands: false,
+      serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
     };
 
     await mongoose.connect(MONGODB_URI, opts);
