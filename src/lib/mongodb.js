@@ -53,12 +53,12 @@ async function connectToDatabase() {
     };
     
   } catch (error) {
-    // Executes only on FAILURE (e.g., bad auth, timeout)
+    // Executes only on FAILURE
     cached.promise = null; 
     throw error; // Re-throws the error, stopping execution cleanly
   }
 
-  // DELETE the redundant code that used to be here!
+  // DELETE the redundant code that was previously here
 }
 
 // Unused function - keeping for backward compatibility
