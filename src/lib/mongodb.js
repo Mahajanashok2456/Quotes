@@ -33,7 +33,8 @@ async function connectToDatabase() {
       console.log("MongoDB connected successfully with extended timeout."); // Add log
       // Return an object with the native MongoDB database instance
       return {
-        db: mongoose.connection.db
+        db: mongoose.connection.db,
+        mongoose: mongoose
       };
     }).catch(err => {
       console.error("MongoDB connection error:", err); // Log connection errors
