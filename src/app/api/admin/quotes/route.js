@@ -3,7 +3,7 @@ import Quote from '@/models/Quote';
 import { ObjectId } from 'mongodb';
 import { NextResponse } from 'next/server';
 import { rateLimit } from '@/lib/rateLimiter';
-import DOMPurify from 'dompurify';
+import sanitizeHtml from 'sanitize-html';
 
 /**
  * GET /api/admin/quotes
@@ -67,10 +67,10 @@ export async function POST(request) {
 
     // Sanitize input
     const sanitizedBody = {
-      text: DOMPurify.sanitize(body.text || ''),
-      author: DOMPurify.sanitize(body.author || ''),
-      font_family: DOMPurify.sanitize(body.font_family || 'Arial'),
-      font_color: DOMPurify.sanitize(body.font_color || '#000000'),
+      text: sanitizeHtml(body.text || ''),
+      author: sanitizeHtml(body.author || ''),
+      font_family: sanitizeHtml(body.font_family || 'Arial'),
+      font_color: sanitizeHtml(body.font_color || '#000000'),
       likes: body.likes || 0,
       is_pinned: body.is_pinned || false,
       created_at: body.created_at || new Date()
@@ -147,10 +147,10 @@ export async function PUT(request) {
 
     // Sanitize input
     const sanitizedQuoteData = {
-      text: DOMPurify.sanitize(quoteData.text || ''),
-      author: DOMPurify.sanitize(quoteData.author || ''),
-      font_family: DOMPurify.sanitize(quoteData.font_family || 'Arial'),
-      font_color: DOMPurify.sanitize(quoteData.font_color || '#000000'),
+      text: sanitizeHtml(quoteData.text || ''),
+      author: sanitizeHtml(quoteData.author || ''),
+      font_family: sanitizeHtml(quoteData.font_family || 'Arial'),
+      font_color: sanitizeHtml(quoteData.font_color || '#000000'),
       likes: quoteData.likes || 0,
       is_pinned: quoteData.is_pinned || false,
       created_at: quoteData.created_at || new Date()
