@@ -2,29 +2,53 @@ export default function About() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-deep-teal-900 via-slate-blue to-soft-peach text-light-cream p-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center" style={{ fontFamily: 'var(--font-cookie)' }}>
-          About Mahajan's Quotes
+        <h1
+          className="text-4xl md:text-5xl font-bold mb-8 text-center"
+          style={{ fontFamily: "var(--font-cookie)" }}
+        >
+          About Mahajan&apos;s Quotes
         </h1>
 
         <div className="bg-white/10 backdrop-blur-lg rounded-lg p-8 shadow-xl">
-          <h2 className="text-2xl font-semibold mb-6 text-soft-peach">Our Mission</h2>
+          <h2 className="text-2xl font-semibold mb-6 text-soft-peach">
+            Our Mission
+          </h2>
           <p className="text-lg leading-relaxed mb-6">
-            Mahajan's Quotes is a curated collection of profound words, poetry, and thoughts designed to inspire, motivate, and ignite the spirit of readers worldwide. We believe that the right words at the right time can transform perspectives and spark meaningful change.
+            Mahajan&apos;s Quotes is a curated collection of profound words,
+            poetry, and thoughts designed to inspire, motivate, and ignite the
+            spirit of readers worldwide. We believe that the right words at the
+            right time can transform perspectives and spark meaningful change.
           </p>
 
-          <h2 className="text-2xl font-semibold mb-6 text-soft-peach">What We Offer</h2>
+          <h2 className="text-2xl font-semibold mb-6 text-soft-peach">
+            What We Offer
+          </h2>
           <p className="text-lg leading-relaxed mb-6">
-            Our platform features a carefully selected assortment of quotes spanning various themes including wisdom, motivation, love, success, and personal growth. Each quote is chosen for its depth, authenticity, and potential to resonate with our diverse audience.
+            Our platform features a carefully selected assortment of quotes
+            spanning various themes including wisdom, motivation, love, success,
+            and personal growth. Each quote is chosen for its depth,
+            authenticity, and potential to resonate with our diverse audience.
           </p>
 
-          <h2 className="text-2xl font-semibold mb-6 text-soft-peach">Our Commitment</h2>
+          <h2 className="text-2xl font-semibold mb-6 text-soft-peach">
+            Our Commitment
+          </h2>
           <p className="text-lg leading-relaxed mb-6">
-            We are dedicated to providing a clean, aesthetic, and user-friendly experience that allows visitors to discover inspiration effortlessly. Our collection grows continuously as we seek out meaningful contributions from thinkers, writers, and visionaries across generations.
+            We are dedicated to providing a clean, aesthetic, and user-friendly
+            experience that allows visitors to discover inspiration
+            effortlessly. Our collection grows continuously as we seek out
+            meaningful contributions from thinkers, writers, and visionaries
+            across generations.
           </p>
 
-          <h2 className="text-2xl font-semibold mb-6 text-soft-peach">Join Our Community</h2>
+          <h2 className="text-2xl font-semibold mb-6 text-soft-peach">
+            Join Our Community
+          </h2>
           <p className="text-lg leading-relaxed">
-            Whether you're seeking daily inspiration, looking for the perfect quote to share, or simply exploring the beauty of language, Mahajan's Quotes welcomes you to our community of thoughtful readers and writers.
+            Whether you&apos;re seeking daily inspiration, looking for the
+            perfect quote to share, or simply exploring the beauty of language,
+            Mahajan&apos;s Quotes welcomes you to our community of thoughtful
+            readers and writers.
           </p>
         </div>
       </div>
