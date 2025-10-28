@@ -137,12 +137,9 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section className="relative w-full max-w-6xl mx-auto mb-12">
-        {/* 1. Purple Gradient Separator Bar */}
-        <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-r from-purple-700 to-deep-teal-900 shadow-xl" />
-
-        {/* 2. Custom Font Text Centered Below the Bar */}
-        <div className="relative text-center py-16 md:py-24 z-10 max-w-4xl mx-auto">
+      <section className="w-full max-w-6xl mx-auto mb-12">
+        {/* Custom Font Text Centered */}
+        <div className="text-center py-8 md:py-16 max-w-4xl mx-auto">
           {/* H1: Primary Title (Custom Font) */}
           <h1
             className="text-5xl md:text-6xl font-bold mb-2 drop-shadow-lg text-soft-peach"
