@@ -135,29 +135,23 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
-      <header className="max-w-6xl mx-auto mb-8 text-center">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-2 animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent" style={{ fontFamily: 'var(--font-cookie)' }}>Did you  felt the same ?</h1>
-        <p className="text-lg text-light-cream" style={{ fontFamily: 'var(--font-homemade-apple)' }}>
-          Nothing Just Real Thoughts !!
-        </p>
-      </header>
 
-      {quotes.length === 0 ? (
-        <div className="max-w-6xl mx-auto text-center py-12">
-          <h2 className="text-xl font-semibold">No quotes available</h2>
-          <p className="mt-2 text-gray-600 dark:text-gray-400">
-            Be the first to add a quote!
-          </p>
-        </div>
-      ) : (
-        <div className="max-w-6xl mx-auto">
-          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
-            {quotes.map((quote) => (
-              <QuoteCard key={quote._id} quote={quote} onCardClick={handleCardClick} />
-            ))}
+        {quotes.length === 0 ? (
+          <div className="max-w-6xl mx-auto text-center py-12">
+            <h2 className="text-xl font-semibold">No quotes available</h2>
+            <p className="mt-2 text-gray-600 dark:text-gray-400">
+              Be the first to add a quote!
+            </p>
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="max-w-6xl mx-auto">
+            <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
+              {quotes.map((quote) => (
+                <QuoteCard key={quote._id} quote={quote} onCardClick={handleCardClick} />
+              ))}
+            </div>
+          </div>
+        )}
       <AnimatePresence>
         {selectedQuote && (
           <motion.div

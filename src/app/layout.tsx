@@ -87,8 +87,8 @@ export default function RootLayout({
         <div className="overlay"></div>
         <header className="bg-gradient-to-r from-purple-900 to-indigo-800 p-4 shadow-lg">
           <div className="container mx-auto">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="text-2xl font-bold text-white hover:text-soft-peach transition-colors"
               style={{ fontFamily: 'var(--font-cookie)' }}
             >
@@ -100,6 +100,8 @@ export default function RootLayout({
           {children}
         </Providers>
         <footer className="text-center py-4 bg-gray-100 dark:bg-gray-800 mt-8">
+          <Link href="/about" className="mr-4 text-xs text-gray-500 hover:underline">About Us</Link>
+          <Link href="/contact" className="mr-4 text-xs text-gray-500 hover:underline">Contact Us</Link>
           <Link href="/privacy" className="mr-4 text-xs text-gray-500 hover:underline">Privacy Policy</Link>
           <Link href="/terms" className="text-xs text-gray-500 hover:underline">Terms of Service</Link>
         </footer>
