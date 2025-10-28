@@ -1,35 +1,35 @@
 export default function Contact() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-deep-teal-900 via-slate-blue to-soft-peach text-light-cream p-8">
+    <div className="min-h-screen bg-gradient-to-br from-deep-teal-900 via-slate-blue to-soft-peach text-light-cream p-4 sm:p-6 md:p-8">
       <div className="max-w-4xl mx-auto">
         <h1
-          className="text-4xl md:text-5xl font-bold mb-8 text-center"
+          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8 text-center px-2"
           style={{ fontFamily: "var(--font-cookie)" }}
         >
           Contact Us
         </h1>
 
-        <div className="bg-white/10 backdrop-blur-lg rounded-lg p-8 shadow-xl text-center">
-          <h2 className="text-2xl font-semibold mb-6 text-soft-peach">
+        <div className="bg-white/10 backdrop-blur-lg rounded-lg p-4 sm:p-6 md:p-8 shadow-xl text-center">
+          <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-soft-peach">
             Get In Touch
           </h2>
-          <p className="text-lg leading-relaxed mb-8">
+          <p className="text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 px-2">
             We&apos;d love to hear from you! Whether you have questions,
             suggestions, or just want to share your thoughts, feel free to reach
             out.
           </p>
 
-          <div className="bg-white/5 rounded-lg p-6">
-            <p className="text-xl font-medium mb-2">Email Us At:</p>
+          <div className="bg-white/5 rounded-lg p-4 sm:p-6 mx-auto max-w-md">
+            <p className="text-lg sm:text-xl font-medium mb-2">Email Us At:</p>
             <a
               href="mailto:ashoroshan78@gmail.com"
-              className="text-2xl font-bold text-soft-peach hover:text-light-cream transition-colors underline"
+              className="text-xl sm:text-2xl font-bold text-soft-peach hover:text-light-cream transition-colors underline break-all"
             >
               ashoroshan78@gmail.com
             </a>
           </div>
 
-          <p className="text-sm mt-8 text-light-cream/80">
+          <p className="text-xs sm:text-sm mt-6 sm:mt-8 text-light-cream/80 px-2">
             We typically respond within 24-48 hours. Thank you for your interest
             in Mahajan&apos;s Quotes!
           </p>
