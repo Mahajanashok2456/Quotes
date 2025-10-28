@@ -142,7 +142,9 @@ export default function Home() {
         <div className="text-center py-8 md:py-16 max-w-4xl mx-auto">
           {/* H1: Primary Title (Custom Font) */}
           <h1
-            className="text-5xl md:text-6xl font-bold mb-2 drop-shadow-lg text-soft-peach"
+            className="text-5xl md:text-6xl font-bold mb-2 drop-shadow-lg
+                       bg-gradient-to-b from-purple-500 to-white
+                       bg-clip-text text-transparent"
             style={{ fontFamily: 'var(--font-cookie)' }}
           >
             Did you felt the same?
