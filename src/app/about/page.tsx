@@ -1,5 +1,3 @@
-import AdSense from "../../../components/AdSense";
-
 export default function About() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-deep-teal-900 via-slate-blue to-soft-peach text-light-cream p-4 sm:p-6 md:p-8">
@@ -10,11 +8,6 @@ export default function About() {
         >
           About Mahajan&apos;s Quotes
         </h1>
-
-        {/* Top Ad - Replace YOUR_AD_SLOT_1 with your actual ad slot ID from AdSense */}
-        <div className="mb-6 sm:mb-8">
-          <AdSense adSlot="YOUR_AD_SLOT_1" adFormat="horizontal" />
-        </div>
 
         <div className="bg-white/10 backdrop-blur-lg rounded-lg p-4 sm:p-6 md:p-8 shadow-xl">
           <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-soft-peach">
@@ -36,11 +29,6 @@ export default function About() {
             and personal growth. Each quote is chosen for its depth,
             authenticity, and potential to resonate with our diverse audience.
           </p>
-
-          {/* Middle Ad - Replace YOUR_AD_SLOT_2 with your actual ad slot ID from AdSense */}
-          <div className="my-6 sm:my-8">
-            <AdSense adSlot="YOUR_AD_SLOT_2" />
-          </div>
 
           <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-soft-peach">
             Our Commitment
