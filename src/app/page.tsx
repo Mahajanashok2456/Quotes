@@ -56,8 +56,7 @@ export default function Home() {
         } else {
           setError(data.error || 'Failed to fetch quotes');
         }
-      } catch (error) {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch {
         setError('Failed to fetch quotes');
       } finally {
         setLoading(false);
@@ -240,8 +239,7 @@ function QuoteCard({ quote, onCardClick }: { quote: Quote; onCardClick: (quote: 
         console.error('Failed to like quote:', errorMessage);
         alert(`Failed to like quote: ${errorMessage}`);
       }
-    } catch (error) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch {
       // Error Reversion: Revert optimistic update on network error
       setLikes(prevLikes => prevLikes - 1);
       console.error('Failed to like quote due to network error');
@@ -254,8 +252,7 @@ function QuoteCard({ quote, onCardClick }: { quote: Quote; onCardClick: (quote: 
       await navigator.clipboard.writeText(quote.text);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000); // Reset copied status after 2 seconds
-    } catch (error) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch {
       alert('Failed to copy quote to clipboard');
     }
   };
