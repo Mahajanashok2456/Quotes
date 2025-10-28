@@ -136,7 +136,31 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-        {quotes.length === 0 ? (
+      {/* Hero Section */}
+      <section className="relative w-full max-w-6xl mx-auto mb-12">
+        {/* 1. Purple Gradient Separator Bar */}
+        <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-r from-purple-700 to-deep-teal-900 shadow-xl" />
+
+        {/* 2. Custom Font Text Centered Below the Bar */}
+        <div className="relative text-center py-16 md:py-24 z-10 max-w-4xl mx-auto">
+          {/* H1: Primary Title (Custom Font) */}
+          <h1
+            className="text-5xl md:text-6xl font-bold mb-2 drop-shadow-lg text-soft-peach"
+            style={{ fontFamily: 'var(--font-cookie)' }}
+          >
+            Did you felt the same?
+          </h1>
+          {/* P: Tagline (Custom Font) */}
+          <p
+            className="text-xl md:text-2xl drop-shadow-lg text-light-cream"
+            style={{ fontFamily: 'var(--font-homemade-apple)' }}
+          >
+            Nothing Just Real Thoughts !!
+          </p>
+        </div>
+      </section>
+
+      {quotes.length === 0 ? (
           <div className="max-w-6xl mx-auto text-center py-12">
             <h2 className="text-xl font-semibold">No quotes available</h2>
             <p className="mt-2 text-gray-600 dark:text-gray-400">
