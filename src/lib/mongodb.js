@@ -17,12 +17,12 @@ if (!cached) {
 }
 
 async function connectToDatabase() {
-  if (cached.conn) {
-    // Ensure we return the correct structure even for cached connections
-    return { 
-      db: cached.conn.connection.db,
-      mongoose: cached.conn 
-    };
+  // Only check cached connection and proceed to main logic if not valid
+  if (cached.conn && cached.conn.connection.readyState === 1 && cached.conn.connection.db) {
+    // Cached connection is valid, proceed to return it from main try-catch
+  } else {
+    // Reset cached connection if invalid
+    cached.conn = null;
   }
 
   if (!cached.promise) {
@@ -44,14 +44,17 @@ async function connectToDatabase() {
   }
   
   try {
-    cached.conn = await cached.promise;
+    // If we don't have a valid cached connection, establish one
+    if (!cached.conn) {
+      cached.conn = await cached.promise;
+    }
 
     // Ensure the database object is available
     if (!cached.conn.connection.db) {
       throw new Error('Database connection not fully established');
     }
 
-    // 🛑 MOVE THE FINAL RETURN STATEMENT HERE (Only executed on SUCCESS)
+    // 🛑 FINAL RETURN STATEMENT - ONLY EXECUTED ON SUCCESS
     return {
       db: cached.conn.connection.db, // Extracts the native database instance
       mongoose: cached.conn
@@ -60,10 +63,9 @@ async function connectToDatabase() {
   } catch (error) {
     // Executes only on FAILURE
     cached.promise = null;
+    cached.conn = null; // Also reset the connection on failure
     throw error; // Re-throws the error, stopping execution cleanly
   }
-
-  // DELETE the redundant code that was previously here
 }
 
 // Unused function - keeping for backward compatibility

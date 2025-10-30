@@ -8,9 +8,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "create-admin": "node src/scripts/create-admin.js"
+    "create-admin": "node src/scripts/create-admin.js",
+    "analyze": "ANALYZE=true next build",
+    "analyze:view": "next build && npx serve .next/analyze"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@vercel/otel": "^2.0.1",
     "bcryptjs": "^3.0.2",
@@ -21,23 +24,30 @@
     "html2canvas": "^1.4.1",
     "mongodb": "^6.20.0",
     "mongoose": "^8.19.1",
-    "next": "15.5.6",
+    "next": "^16.0.1",
     "next-auth": "^4.24.11",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-markdown": "^10.1.0",
     "react-type-animation": "^3.2.0",
-    "sanitize-html": "^2.17.0"
+    "rehype-raw": "^7.0.0",
+    "rehype-sanitize": "^6.0.0",
+    "remark-gfm": "^4.0.1",
+    "sanitize-html": "^2.17.0",
+    "sharp": "^0.34.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@next/bundle-analyzer": "^16.0.1",
     "@tailwindcss/postcss": "^4",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.5.6",
-    "tailwindcss": "^4",
+    "tailwindcss": "^3.4.18",
     "typescript": "^5"
   }
 }

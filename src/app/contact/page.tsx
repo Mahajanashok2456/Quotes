@@ -1,3 +1,26 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Contact Us - Echoes of Mahajan',
+  description: "Get in touch with Echoes of Mahajan. We'd love to hear from you about quotes, inspiration, or any questions you have. Reach out via email for submissions or inquiries.",
+  keywords: "contact us, email, quotes submission, inspiration, feedback, Echoes of Mahajan",
+  openGraph: {
+    title: "Contact Us - Echoes of Mahajan",
+    description: "Get in touch with us. We'd love to hear your thoughts on quotes, inspiration, and personal growth.",
+    type: "website",
+    url: "https://quotes-website-self.vercel.app/contact",
+    siteName: "Echoes of Mahajan",
+  },
+  twitter: {
+    card: "summary",
+    title: "Contact Us - Echoes of Mahajan",
+    description: "Get in touch with us. We'd love to hear your thoughts on quotes, inspiration, and personal growth.",
+  },
+  alternates: {
+    canonical: 'https://quotes-website-self.vercel.app/contact',
+  },
+};
+
 export default function Contact() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-deep-teal-900 via-slate-blue to-soft-peach text-light-cream p-4 sm:p-6 md:p-8">

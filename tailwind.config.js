@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const config = {
+export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -13,6 +13,9 @@ const config = {
         'slate-blue': '#65727d',
         'soft-peach': '#f4d4c1',
         'light-cream': '#f4f6f5',
+      },
+      fontFamily: {
+        'foldit': ['Foldit', 'sans-serif'],
       },
       animation: {
         text: 'text 5s ease infinite',
@@ -33,5 +36,3 @@ const config = {
   },
   plugins: [],
 }
-
-export default config

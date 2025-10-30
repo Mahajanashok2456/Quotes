@@ -1,3 +1,26 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About Us - Echoes of Mahajan',
+  description: 'Learn about Echoes of Mahajan\'s mission to provide deeply aesthetic and inspiring quotes, poetry, and thoughts. Discover our commitment to meaningful content and personal growth.',
+  keywords: 'about us, mission, inspiration, quotes, poetry, personal growth, motivation, Echoes of Mahajan',
+  openGraph: {
+    title: 'About Us - Echoes of Mahajan',
+    description: 'Learn about our mission to provide deeply aesthetic and inspiring quotes, poetry, and thoughts for personal growth and motivation.',
+    type: 'website',
+    url: 'https://quotes-website-self.vercel.app/about',
+    siteName: 'Echoes of Mahajan',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'About Us - Echoes of Mahajan',
+    description: 'Learn about our mission to provide deeply aesthetic and inspiring quotes, poetry, and thoughts for personal growth and motivation.',
+  },
+  alternates: {
+    canonical: 'https://quotes-website-self.vercel.app/about',
+  },
+};
+
 export default function About() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-deep-teal-900 via-slate-blue to-soft-peach text-light-cream p-4 sm:p-6 md:p-8">
