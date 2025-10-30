@@ -7,6 +7,12 @@ import "./globals.css";
 import Providers from "./Providers";
 import AdminLoginModal from "./components/AdminLoginModal";
 import HeaderNav from "../../components/HeaderNav";
+import dynamic from "next/dynamic";
+
+// Load CookieBanner on client only to avoid SSR mismatch
+const CookieBanner = dynamic(() => import("./components/CookieBanner"), {
+  ssr: false,
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -90,6 +96,7 @@ export default function RootLayout({
         <HeaderNav />
         <div className="overlay"></div>
         <Providers>{children}</Providers>
+        <CookieBanner />
         <footer className="text-center py-6 bg-gray-100 dark:bg-gray-800 mt-8">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
