@@ -3,26 +3,7 @@ import Blog from "@/models/Blog";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 
-// Define auth options inline since they're not exported
 const authOptions = {
-  providers: [], // We'll handle this in the session check
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (token && session.user) {
-        session.user.id = token.id;
-      }
-      return session;
-    },
-  },
-  session: {
-    strategy: "jwt",
-  },
   secret: process.env.NEXTAUTH_SECRET,
 };
 

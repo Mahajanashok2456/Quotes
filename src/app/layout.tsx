@@ -7,12 +7,7 @@ import "./globals.css";
 import Providers from "./Providers";
 import AdminLoginModal from "./components/AdminLoginModal";
 import HeaderNav from "../../components/HeaderNav";
-import dynamic from "next/dynamic";
-
-// Load CookieBanner on client only to avoid SSR mismatch
-const CookieBanner = dynamic(() => import("./components/CookieBanner"), {
-  ssr: false,
-});
+import CookieBanner from "./components/CookieBanner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
