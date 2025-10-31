@@ -36,53 +36,46 @@ export default function HeaderNav() {
     >
       <nav className="container mx-auto px-3 sm:px-4 lg:px-6 py-2 sm:py-3 lg:py-4">
         <div className="flex items-center justify-between h-auto min-h-[48px] relative overflow-hidden">
-          {/* Left side: Logo and Desktop Navigation */}
-          <div className="flex items-center gap-4 lg:gap-6 xl:gap-8">
-            {/* Logo/Brand */}
-            <div className="flex justify-start min-w-0 flex-shrink-0">
-              <Link
-                href="/"
-                className="text-white font-cursive text-base sm:text-lg lg:text-xl xl:text-2xl font-semibold tracking-wide hover:opacity-90 transition-opacity duration-300 whitespace-nowrap block"
-                style={{ fontFamily: "'Dancing Script', cursive" }}
-              >
-                Echoes of Mahajan
-              </Link>
-            </div>
+          {/* Logo/Brand */}
+          <div className="flex justify-start min-w-0 flex-shrink-0">
+            <Link
+              href="/"
+              className="text-white font-cursive text-base sm:text-lg lg:text-xl xl:text-2xl font-semibold tracking-wide hover:opacity-90 transition-opacity duration-300 whitespace-nowrap block"
+              style={{ fontFamily: "'Dancing Script', cursive" }}
+            >
+              Echoes of Mahajan
+            </Link>
+          </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-4 lg:gap-6 xl:gap-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
+          {/* Desktop Navigation - Centered */}
+          <div className="hidden lg:flex items-center justify-center flex-1 gap-4 lg:gap-6 xl:gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`
+                  relative px-2 lg:px-4 py-2 text-white font-medium text-xs lg:text-sm xl:text-base
+                  transition-all duration-300 ease-in-out
+                  hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]
+                  group
+                  ${
+                    isActive(link.href)
+                      ? "text-white font-semibold"
+                      : "text-white/90"
+                  }
+                `}
+                style={{ fontFamily: "'Poppins', sans-serif" }}
+              >
+                {link.name}
+                <span
                   className={`
-                    relative px-2 lg:px-4 py-2 text-white font-medium text-xs lg:text-sm xl:text-base
+                    absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-white
                     transition-all duration-300 ease-in-out
-                    hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]
-                    group
-                    ${
-                      isActive(link.href)
-                        ? "text-white font-semibold"
-                        : "text-white/90"
-                    }
+                    ${isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"}
                   `}
-                  style={{ fontFamily: "'Poppins', sans-serif" }}
-                >
-                  {link.name}
-                  <span
-                    className={`
-                      absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-white
-                      transition-all duration-300 ease-in-out
-                      ${
-                        isActive(link.href)
-                          ? "w-full"
-                          : "w-0 group-hover:w-full"
-                      }
-                    `}
-                  />
-                </Link>
-              ))}
-            </div>
+                />
+              </Link>
+            ))}
           </div>
 
           {/* Mobile Menu Button with divider */}
