@@ -33,10 +33,27 @@ export default function Home() {
   const [selectedQuote, setSelectedQuote] = useState<Quote | null>(null);
   const [showWelcome, setShowWelcome] = useState(true);
 
+  // Preload critical resources
+  useEffect(() => {
+    // Preload the video for faster display
+    const video = document.createElement("link");
+    video.rel = "preload";
+    video.href = "/Flowers.webm";
+    video.as = "fetch"; // Use 'fetch' instead of 'video' for better compatibility
+    video.crossOrigin = "anonymous";
+    document.head.appendChild(video);
+
+    return () => {
+      if (document.head.contains(video)) {
+        document.head.removeChild(video);
+      }
+    };
+  }, []);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowWelcome(false);
-    }, 3500); // 3.5 seconds
+    }, 2500); // Reduced to 2.5 seconds for faster loading
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, []);
@@ -52,13 +69,7 @@ export default function Home() {
   useEffect(() => {
     const fetchQuotes = async () => {
       try {
-        // Add cache control headers for better caching
-        const response = await fetch("/api/quotes", {
-          next: { revalidate: 300 }, // Cache for 5 minutes
-          headers: {
-            "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
-          },
-        });
+        const response = await fetch("/api/quotes");
         const data = await response.json();
 
         if (data.success) {
@@ -115,7 +126,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen text-foreground p-4 sm:p-8">
+    <div className="min-h-screen text-foreground p-4 sm:p-6 lg:p-8">
       <AnimatePresence>
         {showWelcome && (
           <motion.div
@@ -125,12 +136,12 @@ export default function Home() {
             transition={{ duration: 1.0, ease: "easeInOut" }}
           >
             {/* Welcome Message (with a semi-transparent backdrop for readability) */}
-            <div className="relative z-10 text-center text-white p-4 bg-black/30 rounded-lg">
+            <div className="relative z-10 text-center text-white p-4 bg-black/30 rounded-lg max-w-sm sm:max-w-md mx-4">
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.0, delay: 0.5 }}
-                className="text-5xl md:text-7xl font-serif text-soft-peach"
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="text-3xl sm:text-5xl md:text-7xl font-serif text-soft-peach"
                 style={{ textShadow: "2px 2px 8px rgba(0,0,0,0.7)" }}
               >
                 Lets connect with Thoughts !
@@ -138,8 +149,8 @@ export default function Home() {
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 1.0, delay: 1.5 }}
-                className="mt-4 text-lg md:text-xl text-light-cream"
+                transition={{ duration: 0.8, delay: 1.0 }}
+                className="mt-4 text-base sm:text-lg md:text-xl text-light-cream"
               >
                 A collection of own feelings...
               </motion.p>
@@ -151,10 +162,11 @@ export default function Home() {
               loop
               muted
               playsInline
+              preload="metadata"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.0, delay: 2.0 }}
-              className="w-full max-w-md rounded-lg mt-12 shadow-2xl shadow-purple-500/20"
+              transition={{ duration: 0.8, delay: 1.5 }}
+              className="w-full max-w-xs sm:max-w-md rounded-lg mt-8 sm:mt-12 shadow-2xl shadow-purple-500/20"
             >
               <source src="/Flowers.webm" type="video/webm" />
             </motion.video>
@@ -165,19 +177,19 @@ export default function Home() {
       {/* Hero Section */}
       <section className="w-full max-w-6xl mx-auto mb-12">
         {/* Custom Font Text Centered */}
-        <div className="text-center py-8 md:py-16 max-w-4xl mx-auto">
+        <div className="text-center py-8 md:py-16 max-w-4xl mx-auto px-4">
           {/* H1: Primary Title (Custom Font) */}
           <h1
-            className="text-5xl md:text-6xl font-bold mb-2 drop-shadow-lg
-                       bg-gradient-to-b from-purple-500 to-white
-                       bg-clip-text text-transparent"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 drop-shadow-lg
+                        bg-gradient-to-b from-purple-500 to-white
+                        bg-clip-text text-transparent"
             style={{ fontFamily: "var(--font-cookie)" }}
           >
             Did you felt the same?
           </h1>
           {/* P: Tagline (Custom Font) */}
           <p
-            className="text-xl md:text-2xl drop-shadow-lg text-light-cream"
+            className="text-lg sm:text-xl md:text-2xl drop-shadow-lg text-light-cream"
             style={{ fontFamily: "var(--font-homemade-apple)" }}
           >
             Nothing Just Real Thoughts !!

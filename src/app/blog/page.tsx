@@ -77,22 +77,22 @@ export default async function BlogPage() {
   const categories = await getCategories();
 
   return (
-    <div className="min-h-screen text-foreground p-4 sm:p-8">
+    <div className="min-h-screen text-foreground p-4 sm:p-6 lg:p-8">
       <div className="max-w-6xl mx-auto">
         <Breadcrumb />
       </div>
 
       {/* Hero Section */}
       <section className="w-full max-w-6xl mx-auto mb-12">
-        <div className="text-center py-8 md:py-16 max-w-4xl mx-auto">
+        <div className="text-center py-8 md:py-16 max-w-4xl mx-auto px-4">
           <h1
-            className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg bg-gradient-to-b from-purple-500 to-white bg-clip-text text-transparent"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg bg-gradient-to-b from-purple-500 to-white bg-clip-text text-transparent"
             style={{ fontFamily: "var(--font-cookie)" }}
           >
             Inspirational Insights
           </h1>
           <p
-            className="text-lg md:text-xl drop-shadow-lg text-light-cream"
+            className="text-base sm:text-lg md:text-xl drop-shadow-lg text-light-cream"
             style={{ fontFamily: "var(--font-homemade-apple)" }}
           >
             Thoughts that inspire, stories that resonate
@@ -106,13 +106,13 @@ export default async function BlogPage() {
               Explore our collection of inspirational quotes organized by
               themes:
             </p>
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap justify-center gap-3 px-4">
               {categories.map(
                 (category: { _id: string; slug: string; name: string }) => (
                   <Link
                     key={category._id}
                     href={`/categories/${category.slug}`}
-                    className="px-4 py-2 bg-soft-peach/20 text-soft-peach rounded-full hover:bg-soft-peach/30 transition-colors text-sm"
+                    className="px-3 sm:px-4 py-2 bg-soft-peach/20 text-soft-peach rounded-full hover:bg-soft-peach/30 transition-colors text-xs sm:text-sm"
                   >
                     {category.name}
                   </Link>

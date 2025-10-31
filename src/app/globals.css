@@ -42,11 +42,12 @@ body {
   background-image: url("/annie-spratt-fDghTk7Typw-unsplash.jpg");
 
   /* Crucial: Repeat the image across the entire screen */
-  background-repeat: repeat;
+  background-repeat: no-repeat;
 
   /* Make sure the background covers the entire page */
-  background-attachment: scroll;
+  background-attachment: fixed;
   background-size: cover;
+  background-position: center;
 
   /* Apply a filter to fade/darken the image for readability (mimics opacity) */
   /* This is a simple version; a more complex overlay is better, but this is fast. */
@@ -55,9 +56,26 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 
-  /* Add padding for fixed header - compensates for header height */
-  padding-top: 72px !important; /* Adjusted for py-3 lg:py-4 header */
+  /* Add responsive padding for fixed header - compensates for header height */
+  padding-top: 60px; /* Mobile: smaller header */
   margin-top: 0 !important;
+  min-height: 100vh;
+}
+
+/* Mobile-specific background adjustments */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll; /* Better performance on mobile */
+    background-size: cover;
+    background-position: center top; /* Focus on top of image for mobile */
+  }
+}
+
+/* Responsive padding for different screen sizes */
+@media (min-width: 1024px) {
+  body {
+    padding-top: 72px; /* Desktop: larger header */
+  }
 }
 
 /* Optional: Add a subtle overlay to help text readability */

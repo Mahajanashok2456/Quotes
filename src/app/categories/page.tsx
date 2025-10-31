@@ -85,22 +85,22 @@ async function getCategories() {
 export default async function CategoriesPage() {
   const categories = await getCategories();
   return (
-    <div className="min-h-screen text-foreground p-4 sm:p-8">
+    <div className="min-h-screen text-foreground p-4 sm:p-6 lg:p-8">
       <div className="max-w-6xl mx-auto">
         <Breadcrumb />
       </div>
 
       {/* Hero Section */}
       <section className="w-full max-w-6xl mx-auto mb-12">
-        <div className="text-center py-8 md:py-16 max-w-4xl mx-auto">
+        <div className="text-center py-8 md:py-16 max-w-4xl mx-auto px-4">
           <h1
-            className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg bg-gradient-to-b from-purple-500 to-white bg-clip-text text-transparent"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg bg-gradient-to-b from-purple-500 to-white bg-clip-text text-transparent"
             style={{ fontFamily: "var(--font-cookie)" }}
           >
             Quote Categories
           </h1>
           <p
-            className="text-lg md:text-xl drop-shadow-lg text-light-cream"
+            className="text-base sm:text-lg md:text-xl drop-shadow-lg text-light-cream"
             style={{ fontFamily: "var(--font-homemade-apple)" }}
           >
             Discover inspiration across different themes and topics
@@ -186,16 +186,16 @@ export default async function CategoriesPage() {
             Browse our complete collection of quotes or explore our
             inspirational blog posts for more wisdom and guidance.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
             <Link
               href="/"
-              className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-300"
+              className="inline-flex items-center justify-center px-4 sm:px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 text-sm sm:text-base"
             >
               Browse All Quotes
             </Link>
             <Link
               href="/blog"
-              className="inline-flex items-center justify-center px-6 py-3 bg-slate-blue/20 text-light-cream font-semibold rounded-lg hover:bg-slate-blue/30 transition-all duration-300"
+              className="inline-flex items-center justify-center px-4 sm:px-6 py-3 bg-slate-blue/20 text-light-cream font-semibold rounded-lg hover:bg-slate-blue/30 transition-all duration-300 text-sm sm:text-base"
             >
               Read Blog Posts
             </Link>
@@ -212,22 +212,22 @@ export default async function CategoriesPage() {
           Discover inspirational articles and helpful resources for your
           personal growth journey.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
           <Link
             href="/blog"
-            className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-300"
+            className="inline-flex items-center justify-center px-4 sm:px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 text-sm sm:text-base"
           >
             Read Blog Posts
           </Link>
           <Link
             href="/resources"
-            className="inline-flex items-center justify-center px-6 py-3 bg-slate-blue/20 text-light-cream font-semibold rounded-lg hover:bg-slate-blue/30 transition-all duration-300"
+            className="inline-flex items-center justify-center px-4 sm:px-6 py-3 bg-slate-blue/20 text-light-cream font-semibold rounded-lg hover:bg-slate-blue/30 transition-all duration-300 text-sm sm:text-base"
           >
             View Resources
           </Link>
           <Link
             href="/faq"
-            className="inline-flex items-center justify-center px-6 py-3 bg-slate-blue/20 text-light-cream font-semibold rounded-lg hover:bg-slate-blue/30 transition-all duration-300"
+            className="inline-flex items-center justify-center px-4 sm:px-6 py-3 bg-slate-blue/20 text-light-cream font-semibold rounded-lg hover:bg-slate-blue/30 transition-all duration-300 text-sm sm:text-base"
           >
             FAQ
           </Link>

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { formatDate } from '../lib/utils';
+import { useState, useRef } from "react";
+import { motion } from "framer-motion";
+import { formatDate } from "../lib/utils";
 
 interface Quote {
   _id: string;
@@ -28,32 +28,32 @@ export default function QuoteCard({ quote, onCardClick }: QuoteCardProps) {
 
   const handleLike = async (quoteId: string) => {
     try {
-      if (!quoteId || quoteId === 'undefined') {
-        alert('Invalid quote ID provided');
+      if (!quoteId || quoteId === "undefined") {
+        alert("Invalid quote ID provided");
         return;
       }
 
-      setLikes(prevLikes => prevLikes + 1);
+      setLikes((prevLikes) => prevLikes + 1);
 
       const url = `/api/quotes/${encodeURIComponent(quoteId)}/like`;
 
       const response = await fetch(url, {
-        method: 'PUT',
+        method: "PUT",
       });
 
       const data = await response.json();
 
       if (!response.ok || !data.success) {
-        setLikes(prevLikes => prevLikes - 1);
-        const errorMessage = data.message || data.error || 'Unknown error';
-        console.error('Failed to like quote:', errorMessage);
+        setLikes((prevLikes) => prevLikes - 1);
+        const errorMessage = data.message || data.error || "Unknown error";
+        console.error("Failed to like quote:", errorMessage);
         alert(`Failed to like quote: ${errorMessage}`);
       }
     } catch (error) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      setLikes(prevLikes => prevLikes - 1);
-      console.error('Failed to like quote due to network error');
-      alert('Failed to like quote due to network error');
+      setLikes((prevLikes) => prevLikes - 1);
+      console.error("Failed to like quote due to network error");
+      alert("Failed to like quote due to network error");
     }
   };
 
@@ -64,7 +64,7 @@ export default function QuoteCard({ quote, onCardClick }: QuoteCardProps) {
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      alert('Failed to copy quote to clipboard');
+      alert("Failed to copy quote to clipboard");
     }
   };
 
@@ -75,7 +75,7 @@ export default function QuoteCard({ quote, onCardClick }: QuoteCardProps) {
   return (
     <motion.div
       ref={cardRef}
-      className="break-inside-avoid rounded-xl bg-deep-teal/70 backdrop-blur-lg border border-white/10 shadow-md p-6 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20 cursor-pointer"
+      className="break-inside-avoid rounded-xl bg-deep-teal/70 backdrop-blur-lg border border-white/10 shadow-md p-4 sm:p-6 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20 cursor-pointer"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -85,10 +85,12 @@ export default function QuoteCard({ quote, onCardClick }: QuoteCardProps) {
       <div className="flex flex-col h-full">
         <div className="flex-grow">
           <p
-            className={`text-xl mb-4 italic whitespace-pre-wrap ${!expanded && quote.text.length > 200 ? 'line-clamp-5' : ''}`}
+            className={`text-lg sm:text-xl mb-4 italic whitespace-pre-wrap ${
+              !expanded && quote.text.length > 200 ? "line-clamp-5" : ""
+            }`}
             style={{
-              fontFamily: quote.font_family || 'Arial, sans-serif',
-              color: quote.font_color || '#000000'
+              fontFamily: quote.font_family || "Arial, sans-serif",
+              color: quote.font_color || "#000000",
             }}
           >
             "{quote.text}"
@@ -101,7 +103,7 @@ export default function QuoteCard({ quote, onCardClick }: QuoteCardProps) {
               }}
               className="text-sm font-semibold text-slate-blue hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 hover:underline mt-2"
             >
-              {expanded ? 'Read Less' : 'Read More'}
+              {expanded ? "Read Less" : "Read More"}
             </button>
           )}
           <p className="font-semibold text-right">— {quote.author}</p>
@@ -117,7 +119,7 @@ export default function QuoteCard({ quote, onCardClick }: QuoteCardProps) {
               e.stopPropagation();
               handleLike(quote._id);
             }}
-            className="flex items-center gap-1 px-3 py-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            className="flex items-center gap-1 px-4 py-2 sm:px-3 sm:py-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0"
             aria-label="Like quote"
           >
             <HeartIcon />
@@ -128,11 +130,13 @@ export default function QuoteCard({ quote, onCardClick }: QuoteCardProps) {
               e.stopPropagation();
               handleCopy();
             }}
-            className="flex items-center gap-1 px-3 py-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            className="flex items-center gap-1 px-4 py-2 sm:px-3 sm:py-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0"
             aria-label={copied ? "Copied!" : "Copy quote"}
           >
             <CopyIcon />
-            <span className="text-light-cream">{copied ? 'Copied!' : 'Copy'}</span>
+            <span className="text-light-cream">
+              {copied ? "Copied!" : "Copy"}
+            </span>
           </button>
         </div>
       </div>
@@ -148,7 +152,11 @@ function HeartIcon() {
       viewBox="0 0 20 20"
       fill="currentColor"
     >
-      <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+      <path
+        fillRule="evenodd"
+        d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+        clipRule="evenodd"
+      />
     </svg>
   );
 }

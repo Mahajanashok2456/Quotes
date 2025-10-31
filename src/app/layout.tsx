@@ -45,6 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link
           rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>"
@@ -93,8 +94,8 @@ export default function RootLayout({
         <Providers>{children}</Providers>
         <CookieBanner />
         <footer className="text-center py-6 bg-gray-100 dark:bg-gray-800 mt-8">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-3">
                   Explore
@@ -102,13 +103,13 @@ export default function RootLayout({
                 <div className="space-y-2">
                   <Link
                     href="/blog"
-                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2 px-1 min-h-[44px] flex items-center"
                   >
                     Blog
                   </Link>
                   <Link
                     href="/categories"
-                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2 px-1 min-h-[44px] flex items-center"
                   >
                     Categories
                   </Link>
@@ -121,13 +122,13 @@ export default function RootLayout({
                 <div className="space-y-2">
                   <Link
                     href="/faq"
-                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2 px-1 min-h-[44px] flex items-center"
                   >
                     FAQ
                   </Link>
                   <Link
                     href="/resources"
-                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2 px-1 min-h-[44px] flex items-center"
                   >
                     Resources
                   </Link>
@@ -140,13 +141,13 @@ export default function RootLayout({
                 <div className="space-y-2">
                   <Link
                     href="/about"
-                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2 px-1 min-h-[44px] flex items-center"
                   >
                     About Us
                   </Link>
                   <Link
                     href="/contact"
-                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2 px-1 min-h-[44px] flex items-center"
                   >
                     Contact Us
                   </Link>
@@ -159,13 +160,13 @@ export default function RootLayout({
                 <div className="space-y-2">
                   <Link
                     href="/privacy"
-                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2 px-1 min-h-[44px] flex items-center"
                   >
                     Privacy Policy
                   </Link>
                   <Link
                     href="/terms"
-                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2 px-1 min-h-[44px] flex items-center"
                   >
                     Terms of Service
                   </Link>
@@ -173,7 +174,7 @@ export default function RootLayout({
               </div>
             </div>
             <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
                 © 2024 Echoes of Mahajan. All rights reserved.
               </p>
             </div>
