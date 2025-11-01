@@ -26,9 +26,12 @@ export async function GET(request) {
     // Connect to the database
     const { db } = await connectToDatabase();
 
-    // Fetch all quotes
+    // Fetch all quotes sorted: pinned first, then newest first
     const quotesCollection = db.collection("quotes");
-    const quotes = await quotesCollection.find({}).toArray();
+    const quotes = await quotesCollection
+      .find({})
+      .sort({ is_pinned: -1, created_at: -1 })
+      .toArray();
 
     // Return the quotes as is
     return NextResponse.json(

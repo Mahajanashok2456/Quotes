@@ -7,12 +7,13 @@ export async function GET(request) {
     // 1. Connect (Note: We only need the connection for Mongoose to work)
     await connectToDatabase();
 
-    // 2. Fetch data using the Mongoose Model with lean() for better performance
+    // 2. Fetch data sorted: pinned first, then newest first
     // Only select necessary fields to reduce data transfer
     const quotes = await Quote.find({})
       .select(
         "_id text author font_family font_color likes is_pinned created_at"
       )
+      .sort({ is_pinned: -1, created_at: -1 })
       .lean();
 
     // 3. Return the data in the expected format

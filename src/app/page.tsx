@@ -73,14 +73,15 @@ export default function Home() {
         const data = await response.json();
 
         if (data.success) {
-          const sortedQuotes = data.data.sort((a: Quote, b: Quote) => {
-            if (a.is_pinned !== b.is_pinned) {
-              return b.is_pinned ? 1 : -1;
-            }
-            return (
-              new Date(b.created_at).getTime() -
-              new Date(a.created_at).getTime()
-            );
+          const sortedQuotes = (data.data || []).sort((a: Quote, b: Quote) => {
+            if (a.is_pinned !== b.is_pinned) return a.is_pinned ? -1 : 1;
+            const at = new Date(
+              a.created_at || (a as any).createdAt || 0
+            ).getTime();
+            const bt = new Date(
+              b.created_at || (b as any).createdAt || 0
+            ).getTime();
+            return bt - at;
           });
           setQuotes(sortedQuotes);
         } else {
@@ -206,10 +207,10 @@ export default function Home() {
         </div>
       ) : (
         <div className="max-w-6xl mx-auto">
-          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <Suspense
               fallback={
-                <SkeletonLoader variant="card" className="break-inside-avoid" />
+                <SkeletonLoader variant="card" className="w-full" />
               }
             >
               {quotes.map((quote) => (

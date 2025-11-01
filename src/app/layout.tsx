@@ -93,80 +93,80 @@ export default function RootLayout({
         <div className="overlay"></div>
         <Providers>{children}</Providers>
         <CookieBanner />
-        <footer className="text-center py-6 bg-gray-100 dark:bg-gray-800 mt-8">
+        <footer className="text-center py-4 sm:py-6 bg-gray-100 dark:bg-gray-800 mt-8">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-4 sm:mb-6">
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-3">
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3 text-sm sm:text-base">
                   Explore
                 </h3>
-                <div className="space-y-2">
+                <div className="space-y-1.5 sm:space-y-2">
                   <Link
                     href="/blog"
-                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2 px-1 min-h-[44px] flex items-center"
+                    className="block text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-1.5 sm:py-2 px-1 min-h-[36px] sm:min-h-[44px] flex items-center"
                   >
                     Blog
                   </Link>
                   <Link
                     href="/categories"
-                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2 px-1 min-h-[44px] flex items-center"
+                    className="block text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-1.5 sm:py-2 px-1 min-h-[36px] sm:min-h-[44px] flex items-center"
                   >
                     Categories
                   </Link>
                 </div>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-3">
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3 text-sm sm:text-base">
                   Support
                 </h3>
-                <div className="space-y-2">
+                <div className="space-y-1.5 sm:space-y-2">
                   <Link
                     href="/faq"
-                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2 px-1 min-h-[44px] flex items-center"
+                    className="block text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-1.5 sm:py-2 px-1 min-h-[36px] sm:min-h-[44px] flex items-center"
                   >
                     FAQ
                   </Link>
                   <Link
                     href="/resources"
-                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2 px-1 min-h-[44px] flex items-center"
+                    className="block text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-1.5 sm:py-2 px-1 min-h-[36px] sm:min-h-[44px] flex items-center"
                   >
                     Resources
                   </Link>
                 </div>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-3">
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3 text-sm sm:text-base">
                   Company
                 </h3>
-                <div className="space-y-2">
+                <div className="space-y-1.5 sm:space-y-2">
                   <Link
                     href="/about"
-                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2 px-1 min-h-[44px] flex items-center"
+                    className="block text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-1.5 sm:py-2 px-1 min-h-[36px] sm:min-h-[44px] flex items-center"
                   >
                     About Us
                   </Link>
                   <Link
                     href="/contact"
-                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2 px-1 min-h-[44px] flex items-center"
+                    className="block text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-1.5 sm:py-2 px-1 min-h-[36px] sm:min-h-[44px] flex items-center"
                   >
                     Contact Us
                   </Link>
                 </div>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-3">
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3 text-sm sm:text-base">
                   Legal
                 </h3>
-                <div className="space-y-2">
+                <div className="space-y-1.5 sm:space-y-2">
                   <Link
                     href="/privacy"
-                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2 px-1 min-h-[44px] flex items-center"
+                    className="block text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-1.5 sm:py-2 px-1 min-h-[36px] sm:min-h-[44px] flex items-center"
                   >
                     Privacy Policy
                   </Link>
                   <Link
                     href="/terms"
-                    className="block text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-2 px-1 min-h-[44px] flex items-center"
+                    className="block text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors py-1.5 sm:py-2 px-1 min-h-[36px] sm:min-h-[44px] flex items-center"
                   >
                     Terms of Service
                   </Link>
@@ -174,7 +174,7 @@ export default function RootLayout({
               </div>
             </div>
             <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
-              <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 text-center">
                 © 2024 Echoes of Mahajan. All rights reserved.
               </p>
             </div>
