@@ -132,7 +132,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const categoryName = category.name || categorySlug;
 
   return (
-    <div className="min-h-screen text-foreground p-4 sm:p-8">
+    <div className="min-h-screen text-foreground p-4 sm:p-8 pt-20 sm:pt-24 lg:pt-28">
       <div className="max-w-6xl mx-auto">
         <Breadcrumb />
       </div>

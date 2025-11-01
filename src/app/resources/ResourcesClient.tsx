@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Link from "next/link";
-import Breadcrumb from '../../../components/Breadcrumb';
-import AdSense from '../../../components/AdSense';
-import { ADSENSE_CONFIG } from '../../lib/adsense';
+import Breadcrumb from "../../../components/Breadcrumb";
+import AdSense from "../../../components/AdSense";
+import { ADSENSE_CONFIG } from "../../lib/adsense";
 
 interface Resource {
   id: string;
@@ -21,7 +21,8 @@ const resources: Resource[] = [
   {
     id: "1",
     title: "The Power of Now",
-    description: "A spiritual guide to living in the present moment and finding inner peace.",
+    description:
+      "A spiritual guide to living in the present moment and finding inner peace.",
     link: "https://www.amazon.com/Power-Now-Guide-Spiritual-Enlightenment/dp/1577314808",
     category: "Inspirational Books",
     affiliate: true,
@@ -29,14 +30,16 @@ const resources: Resource[] = [
   {
     id: "2",
     title: "Atomic Habits",
-    description: "An easy and proven way to build good habits and break bad ones.",
+    description:
+      "An easy and proven way to build good habits and break bad ones.",
     link: "https://jamesclear.com/atomic-habits",
     category: "Inspirational Books",
   },
   {
     id: "3",
     title: "Man's Search for Meaning",
-    description: "A memoir by Viktor Frankl about finding purpose in suffering.",
+    description:
+      "A memoir by Viktor Frankl about finding purpose in suffering.",
     link: "https://www.amazon.com/Mans-Search-Meaning-Viktor-Frankl/dp/080701429X",
     category: "Inspirational Books",
     affiliate: true,
@@ -46,21 +49,24 @@ const resources: Resource[] = [
   {
     id: "4",
     title: "Headspace",
-    description: "Guided meditation and mindfulness exercises for stress relief and mental clarity.",
+    description:
+      "Guided meditation and mindfulness exercises for stress relief and mental clarity.",
     link: "https://www.headspace.com",
     category: "Meditation Apps",
   },
   {
     id: "5",
     title: "Calm",
-    description: "Sleep stories, meditation, and relaxation techniques for better mental health.",
+    description:
+      "Sleep stories, meditation, and relaxation techniques for better mental health.",
     link: "https://www.calm.com",
     category: "Meditation Apps",
   },
   {
     id: "6",
     title: "Insight Timer",
-    description: "Free meditation app with thousands of guided meditations from teachers worldwide.",
+    description:
+      "Free meditation app with thousands of guided meditations from teachers worldwide.",
     link: "https://insighttimer.com",
     category: "Meditation Apps",
   },
@@ -69,21 +75,24 @@ const resources: Resource[] = [
   {
     id: "7",
     title: "Day One",
-    description: "Beautiful journaling app for capturing memories and reflecting on life.",
+    description:
+      "Beautiful journaling app for capturing memories and reflecting on life.",
     link: "https://dayoneapp.com",
     category: "Journaling Tools",
   },
   {
     id: "8",
     title: "Reflectly",
-    description: "AI-powered journaling companion that helps you understand your emotions.",
+    description:
+      "AI-powered journaling companion that helps you understand your emotions.",
     link: "https://reflectly.app",
     category: "Journaling Tools",
   },
   {
     id: "9",
     title: "Journey",
-    description: "Private journaling app with mood tracking and photo attachments.",
+    description:
+      "Private journaling app with mood tracking and photo attachments.",
     link: "https://journey.cloud",
     category: "Journaling Tools",
   },
@@ -122,14 +131,16 @@ const resources: Resource[] = [
   {
     id: "14",
     title: "Brain Pickings",
-    description: "Maria Popova's blog on art, science, philosophy, and the human experience.",
+    description:
+      "Maria Popova's blog on art, science, philosophy, and the human experience.",
     link: "https://www.brainpickings.org",
     category: "Related Websites & Blogs",
   },
   {
     id: "15",
     title: "The Marginalian",
-    description: "Thoughts on what matters in art, science, and the human spirit.",
+    description:
+      "Thoughts on what matters in art, science, and the human spirit.",
     link: "https://www.themarginalian.org",
     category: "Related Websites & Blogs",
   },
@@ -150,21 +161,25 @@ export default function ResourcesClient() {
   const [showForm, setShowForm] = useState(false);
 
   const filteredResources = resources.filter((resource) => {
-    const matchesCategory = selectedCategory === "All" || resource.category === selectedCategory;
-    const matchesSearch = resource.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          resource.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      selectedCategory === "All" || resource.category === selectedCategory;
+    const matchesSearch =
+      resource.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      resource.description.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
   const handleSubmitResource = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission - for now just show an alert
-    alert("Thank you for your suggestion! We'll review it and add it to our resources if appropriate.");
+    alert(
+      "Thank you for your suggestion! We'll review it and add it to our resources if appropriate."
+    );
     setShowForm(false);
   };
 
   return (
-    <div className="min-h-screen text-foreground p-4 sm:p-8">
+    <div className="min-h-screen text-foreground p-4 sm:p-8 pt-20 sm:pt-24 lg:pt-28">
       <div className="max-w-6xl mx-auto">
         <Breadcrumb />
 
@@ -177,13 +192,13 @@ export default function ResourcesClient() {
         >
           <h1
             className="text-4xl md:text-5xl font-bold mb-4 text-soft-peach"
-            style={{ fontFamily: 'var(--font-cookie)' }}
+            style={{ fontFamily: "var(--font-cookie)" }}
           >
             Inspirational Resources
           </h1>
           <p
             className="text-lg md:text-xl text-light-cream max-w-3xl mx-auto"
-            style={{ fontFamily: 'var(--font-homemade-apple)' }}
+            style={{ fontFamily: "var(--font-homemade-apple)" }}
           >
             Discover tools and resources to enhance your personal growth journey
           </p>
@@ -210,7 +225,11 @@ export default function ResourcesClient() {
               className="px-4 py-2 rounded-lg bg-deep-teal/70 backdrop-blur-lg border border-white/10 text-light-cream focus:outline-none focus:ring-2 focus:ring-soft-peach"
             >
               {categories.map((category) => (
-                <option key={category} value={category} className="bg-deep-teal text-light-cream">
+                <option
+                  key={category}
+                  value={category}
+                  className="bg-deep-teal text-light-cream"
+                >
                   {category}
                 </option>
               ))}
@@ -257,8 +276,12 @@ export default function ResourcesClient() {
                   <span className="text-xs text-light-cream/70">Affiliate</span>
                 )}
               </div>
-              <h3 className="text-xl font-semibold text-light-cream mb-2">{resource.title}</h3>
-              <p className="text-light-cream/80 mb-4 text-sm leading-relaxed">{resource.description}</p>
+              <h3 className="text-xl font-semibold text-light-cream mb-2">
+                {resource.title}
+              </h3>
+              <p className="text-light-cream/80 mb-4 text-sm leading-relaxed">
+                {resource.description}
+              </p>
               <a
                 href={resource.link}
                 target="_blank"
@@ -266,8 +289,18 @@ export default function ResourcesClient() {
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 text-sm font-medium"
               >
                 Visit Resource
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
                 </svg>
               </a>
             </motion.div>
@@ -281,9 +314,12 @@ export default function ResourcesClient() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center mb-8"
         >
-          <h2 className="text-2xl font-semibold text-soft-peach mb-4">Know of a Great Resource?</h2>
+          <h2 className="text-2xl font-semibold text-soft-peach mb-4">
+            Know of a Great Resource?
+          </h2>
           <p className="text-light-cream/80 mb-6 max-w-2xl mx-auto">
-            Help us grow our collection! Share inspirational resources that have helped you on your personal growth journey.
+            Help us grow our collection! Share inspirational resources that have
+            helped you on your personal growth journey.
           </p>
           <button
             onClick={() => setShowForm(!showForm)}
@@ -301,10 +337,14 @@ export default function ResourcesClient() {
             exit={{ opacity: 0, scale: 0.95 }}
             className="bg-deep-teal/70 backdrop-blur-lg border border-white/10 rounded-xl p-6 shadow-xl max-w-2xl mx-auto"
           >
-            <h3 className="text-xl font-semibold text-light-cream mb-4">Suggest a Resource</h3>
+            <h3 className="text-xl font-semibold text-light-cream mb-4">
+              Suggest a Resource
+            </h3>
             <form onSubmit={handleSubmitResource} className="space-y-4">
               <div>
-                <label className="block text-light-cream mb-2">Resource Title</label>
+                <label className="block text-light-cream mb-2">
+                  Resource Title
+                </label>
                 <input
                   type="text"
                   required
@@ -318,16 +358,24 @@ export default function ResourcesClient() {
                   required
                   className="w-full px-4 py-2 rounded-lg bg-deep-teal/50 border border-white/10 text-light-cream focus:outline-none focus:ring-2 focus:ring-soft-peach"
                 >
-                  <option value="" className="bg-deep-teal text-light-cream">Select a category</option>
+                  <option value="" className="bg-deep-teal text-light-cream">
+                    Select a category
+                  </option>
                   {categories.slice(1).map((category) => (
-                    <option key={category} value={category} className="bg-deep-teal text-light-cream">
+                    <option
+                      key={category}
+                      value={category}
+                      className="bg-deep-teal text-light-cream"
+                    >
                       {category}
                     </option>
                   ))}
                 </select>
               </div>
               <div>
-                <label className="block text-light-cream mb-2">Description</label>
+                <label className="block text-light-cream mb-2">
+                  Description
+                </label>
                 <textarea
                   required
                   rows={3}
@@ -370,9 +418,12 @@ export default function ResourcesClient() {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="text-center mt-16"
         >
-          <h2 className="text-2xl font-semibold text-soft-peach mb-4">Explore More Inspiration</h2>
+          <h2 className="text-2xl font-semibold text-soft-peach mb-4">
+            Explore More Inspiration
+          </h2>
           <p className="text-light-cream/80 mb-6 max-w-2xl mx-auto">
-            Discover quotes by category and read our inspirational blog posts for deeper insights.
+            Discover quotes by category and read our inspirational blog posts
+            for deeper insights.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
