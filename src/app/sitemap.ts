@@ -1,123 +1,93 @@
-import connectToDatabase from "@/lib/mongodb";
+import { MetadataRoute } from "next";
+import clientPromise from "@/lib/mongodb";
 
-export default async function sitemap() {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl =
-    process.env.NEXT_PUBLIC_BASE_URL || "https://echoesofmahajan.vercel.app/";
+    process.env.NEXT_PUBLIC_BASE_URL || "https://echoesofmahajan.vercel.app";
 
-  // Static pages
+  // Remove trailing slash if present
+  const cleanBaseUrl = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl;
+
+  // Static pages with actual content
   const staticPages = [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "daily" as const,
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/categories`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/faq`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/resources`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/privacy`,
-      lastModified: new Date(),
-      changeFrequency: "yearly" as const,
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/terms`,
-      lastModified: new Date(),
-      changeFrequency: "yearly" as const,
-      priority: 0.3,
-    },
+    { route: "", changeFreq: "daily" as const, priority: 1 },
+    { route: "/about", changeFreq: "monthly" as const, priority: 0.8 },
+    { route: "/contact", changeFreq: "monthly" as const, priority: 0.7 },
+    { route: "/blog", changeFreq: "weekly" as const, priority: 0.9 },
+    { route: "/categories", changeFreq: "weekly" as const, priority: 0.8 },
+    { route: "/faq", changeFreq: "monthly" as const, priority: 0.7 },
+    { route: "/resources", changeFreq: "monthly" as const, priority: 0.6 },
+    { route: "/privacy", changeFreq: "yearly" as const, priority: 0.3 },
+    { route: "/terms", changeFreq: "yearly" as const, priority: 0.3 },
   ];
 
+  const staticUrls = staticPages.map((page) => ({
+    url: `${cleanBaseUrl}${page.route}`,
+    lastModified: new Date(),
+    changeFrequency: page.changeFreq,
+    priority: page.priority,
+  }));
+
+  // Dynamic quote pages from database
+  let quoteUrls: MetadataRoute.Sitemap = [];
   try {
-    // Connect to database and fetch quotes
-    const { db } = await connectToDatabase();
-    const quotesCollection = db.collection("quotes");
-    const quotes = await quotesCollection.find({}).toArray();
+    const { db } = await clientPromise();
+    const quotes = await db
+      .collection("quotes")
+      .find({})
+      .project({ _id: 1, updatedAt: 1 })
+      .toArray();
 
-    // Generate sitemap entries for each quote
-    const quotePages = quotes.map(
-      (quote: { _id: string; created_at?: string; createdAt?: string }) => ({
-        url: `${baseUrl}/quotes/${quote._id}`,
-        lastModified: new Date(
-          quote.created_at || quote.createdAt || Date.now()
-        ),
-        changeFrequency: "weekly" as const,
-        priority: 0.8,
-      })
-    );
+    quoteUrls = quotes.map((quote: any) => ({
+      url: `${cleanBaseUrl}/quotes/${quote._id.toString()}`,
+      lastModified: quote.updatedAt || new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    }));
+  } catch (error) {
+    console.error("Error fetching quotes for sitemap:", error);
+  }
 
-    // Add blog posts to sitemap
-    const blogPosts = [
-      "the-power-of-daily-reflection",
-      "finding-motivation-in-small-victories",
-      "embracing-imperfection",
-      "building-resilience-through-challenges",
-      "the-art-of-mindful-living",
-    ];
+  // Dynamic blog posts from database (auto-updates when you add new posts)
+  let blogUrls: MetadataRoute.Sitemap = [];
+  try {
+    const { db } = await clientPromise();
+    const blogs = await db
+      .collection("blogs")
+      .find({ isPublished: true })
+      .project({ slug: 1, publishDate: 1, updatedAt: 1 })
+      .toArray();
 
-    const blogPages = blogPosts.map((slug) => ({
-      url: `${baseUrl}/blog/${slug}`,
-      lastModified: new Date(),
+    blogUrls = blogs.map((blog: any) => ({
+      url: `${cleanBaseUrl}/blog/${blog.slug}`,
+      lastModified: blog.updatedAt || blog.publishDate || new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     }));
+  } catch (error) {
+    console.error("Error fetching blogs for sitemap:", error);
+  }
 
-    // Add category pages to sitemap
-    const categories = [
-      "motivation",
-      "love",
-      "success",
-      "wisdom",
-      "inspiration",
-      "life",
-      "happiness",
-      "friendship",
-    ];
+  // Dynamic category pages from database (auto-updates when you add new categories)
+  let categoryUrls: MetadataRoute.Sitemap = [];
+  try {
+    const { db } = await clientPromise();
+    const categories = await db
+      .collection("categories")
+      .find({ isActive: true })
+      .project({ slug: 1, updatedAt: 1 })
+      .toArray();
 
-    const categoryPages = categories.map((category) => ({
-      url: `${baseUrl}/categories/${category}`,
-      lastModified: new Date(),
+    categoryUrls = categories.map((category: any) => ({
+      url: `${cleanBaseUrl}/categories/${category.slug}`,
+      lastModified: category.updatedAt || new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.6,
     }));
-
-    return [...staticPages, ...quotePages, ...blogPages, ...categoryPages];
   } catch (error) {
-    // Return only static pages if quotes fetch fails
-    return staticPages;
+    console.error("Error fetching categories for sitemap:", error);
   }
+
+  // Return all URLs (static + dynamic)
+  return [...staticUrls, ...quoteUrls, ...blogUrls, ...categoryUrls];
 }
