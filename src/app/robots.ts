@@ -22,8 +22,8 @@ export default function robots() {
         ],
         crawlDelay: 1,
       },
-    ],
-    sitemap: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://quotes-website-self.vercel.app/'}/sitemap.xml`,
-    host: process.env.NEXT_PUBLIC_BASE_URL || 'https://quotes-website-self.vercel.app/',
+    },
+    sitemap: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://echoesofmahajan.vercel.app/'}/sitemap.xml`,
+    host: process.env.NEXT_PUBLIC_BASE_URL || 'https://echoesofmahajan.vercel.app/',
   };
 }

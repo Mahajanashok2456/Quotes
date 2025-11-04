@@ -4,7 +4,7 @@
 
 **Last Updated:** October 2025
 
-Welcome to Mahajan's Quotes (https://quotes-website-self.vercel.app/). By accessing or using this website, you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, please do not use the site.
+Welcome to Mahajan's Quotes (https://echoesofmahajan.vercel.app/). By accessing or using this website, you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, please do not use the site.
 
 ## Use of the Website
 

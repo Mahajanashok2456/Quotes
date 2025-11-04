@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     description:
       "Explore our curated collection of quote categories including motivation, love, success, wisdom, personal growth, and more.",
     type: "website",
-    url: "https://quotes-website-self.vercel.app/categories",
+    url: "https://echoesofmahajan.vercel.app/categories",
     siteName: "Echoes of Mahajan",
   },
   twitter: {
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
       "Explore our curated collection of quote categories including motivation, love, success, wisdom, and more.",
   },
   alternates: {
-    canonical: "https://quotes-website-self.vercel.app/categories",
+    canonical: "https://echoesofmahajan.vercel.app/categories",
   },
 };
 

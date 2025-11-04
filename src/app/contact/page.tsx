@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     description:
       "Get in touch with us. We'd love to hear your thoughts on quotes, inspiration, and personal growth.",
     type: "website",
-    url: "https://quotes-website-self.vercel.app/contact",
+    url: "https://echoesofmahajan.vercel.app/contact",
     siteName: "Echoes of Mahajan",
   },
   twitter: {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
       "Get in touch with us. We'd love to hear your thoughts on quotes, inspiration, and personal growth.",
   },
   alternates: {
-    canonical: "https://quotes-website-self.vercel.app/contact",
+    canonical: "https://echoesofmahajan.vercel.app/contact",
   },
 };
 

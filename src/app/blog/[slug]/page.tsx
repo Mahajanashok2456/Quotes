@@ -69,7 +69,7 @@ export async function generateMetadata({
       title: post.title,
       description: post.excerpt || post.title,
       type: "article",
-      url: `https://quotes-website-self.vercel.app/blog/${post.slug}`,
+      url: `https://echoesofmahajan.vercel.app/blog/${post.slug}`,
       siteName: "Echoes of Mahajan",
       publishedTime: post.publishDate,
       authors: ["Echoes of Mahajan"],
@@ -81,7 +81,7 @@ export async function generateMetadata({
       description: post.excerpt || post.title,
     },
     alternates: {
-      canonical: `https://quotes-website-self.vercel.app/blog/${post.slug}`,
+      canonical: `https://echoesofmahajan.vercel.app/blog/${post.slug}`,
     },
   };
 }
@@ -107,17 +107,17 @@ const generateBlogPostSchema = (post: any) => ({
   author: {
     "@type": "Organization",
     name: "Echoes of Mahajan",
-    url: "https://quotes-website-self.vercel.app/",
+    url: "https://echoesofmahajan.vercel.app/",
   },
   publisher: {
     "@type": "Organization",
     name: "Echoes of Mahajan",
-    url: "https://quotes-website-self.vercel.app/",
+    url: "https://echoesofmahajan.vercel.app/",
   },
   datePublished: post.publishDate,
   mainEntityOfPage: {
     "@type": "WebPage",
-    "@id": `https://quotes-website-self.vercel.app/blog/${post.slug}`,
+    "@id": `https://echoesofmahajan.vercel.app/blog/${post.slug}`,
   },
 });
 

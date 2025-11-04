@@ -1,24 +1,28 @@
-import { Metadata } from 'next';
-import FAQClient from './FAQClient';
+import { Metadata } from "next";
+import FAQClient from "./FAQClient";
 
 export const metadata: Metadata = {
-  title: 'FAQ - Frequently Asked Questions | Echoes of Mahajan',
-  description: 'Find answers to common questions about quotes, inspiration, content submission, privacy, AdSense, and more. Get comprehensive help and guidance for using Echoes of Mahajan.',
-  keywords: 'FAQ, frequently asked questions, quotes, inspiration, content submission, privacy policy, contact, AdSense, help',
+  title: "FAQ - Frequently Asked Questions | Echoes of Mahajan",
+  description:
+    "Find answers to common questions about quotes, inspiration, content submission, privacy, AdSense, and more. Get comprehensive help and guidance for using Echoes of Mahajan.",
+  keywords:
+    "FAQ, frequently asked questions, quotes, inspiration, content submission, privacy policy, contact, AdSense, help",
   openGraph: {
-    title: 'FAQ - Frequently Asked Questions | Echoes of Mahajan',
-    description: 'Find answers to common questions about quotes, inspiration, content submission, privacy, and more.',
-    type: 'website',
-    url: 'https://quotes-website-self.vercel.app/faq',
-    siteName: 'Echoes of Mahajan',
+    title: "FAQ - Frequently Asked Questions | Echoes of Mahajan",
+    description:
+      "Find answers to common questions about quotes, inspiration, content submission, privacy, and more.",
+    type: "website",
+    url: "https://echoesofmahajan.vercel.app/faq",
+    siteName: "Echoes of Mahajan",
   },
   twitter: {
-    card: 'summary',
-    title: 'FAQ - Frequently Asked Questions',
-    description: 'Find answers to common questions about quotes, inspiration, content submission, privacy, and more.',
+    card: "summary",
+    title: "FAQ - Frequently Asked Questions",
+    description:
+      "Find answers to common questions about quotes, inspiration, content submission, privacy, and more.",
   },
   alternates: {
-    canonical: 'https://quotes-website-self.vercel.app/faq',
+    canonical: "https://echoesofmahajan.vercel.app/faq",
   },
 };
 

@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     description:
       "Discover inspirational articles on personal growth, mindfulness, motivation, and resilience. Read thought-provoking content about finding meaning and purpose in life.",
     type: "website",
-    url: "https://quotes-website-self.vercel.app/blog",
+    url: "https://echoesofmahajan.vercel.app/blog",
     siteName: "Echoes of Mahajan",
   },
   twitter: {
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
       "Discover inspirational articles on personal growth, mindfulness, motivation, and resilience.",
   },
   alternates: {
-    canonical: "https://quotes-website-self.vercel.app/blog",
+    canonical: "https://echoesofmahajan.vercel.app/blog",
   },
 };
 

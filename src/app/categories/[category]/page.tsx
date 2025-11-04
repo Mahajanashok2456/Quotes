@@ -91,7 +91,7 @@ export async function generateMetadata({
       title: `${categoryName} Quotes - Inspiration & Wisdom`,
       description: `${categoryDescription}. Discover beautiful ${categoryName.toLowerCase()} quotes that inspire and motivate.`,
       type: "website",
-      url: `https://quotes-website-self.vercel.app/categories/${category.slug}`,
+      url: `https://echoesofmahajan.vercel.app/categories/${category.slug}`,
       siteName: "Echoes of Mahajan",
     },
     twitter: {
@@ -100,7 +100,7 @@ export async function generateMetadata({
       description: `${categoryDescription}. Discover beautiful ${categoryName.toLowerCase()} quotes that inspire and motivate.`,
     },
     alternates: {
-      canonical: `https://quotes-website-self.vercel.app/categories/${category.slug}`,
+      canonical: `https://echoesofmahajan.vercel.app/categories/${category.slug}`,
     },
   };
 }

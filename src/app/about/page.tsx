@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     description:
       "Learn about our mission to provide deeply aesthetic and inspiring quotes, poetry, and thoughts for personal growth and motivation.",
     type: "website",
-    url: "https://quotes-website-self.vercel.app/about",
+    url: "https://echoesofmahajan.vercel.app/about",
     siteName: "Echoes of Mahajan",
   },
   twitter: {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
       "Learn about our mission to provide deeply aesthetic and inspiring quotes, poetry, and thoughts for personal growth and motivation.",
   },
   alternates: {
-    canonical: "https://quotes-website-self.vercel.app/about",
+    canonical: "https://echoesofmahajan.vercel.app/about",
   },
 };
 

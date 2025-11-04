@@ -11,12 +11,12 @@ export default function PrivacyPolicy() {
           <strong>Effective Date:</strong> October 2025
         </p>
         <p className="text-sm mb-8">
-          Welcome to Mahajan&apos;s Quotes (
+          Welcome to Mahajan's Quotes (
           <a
-            href="https://quotes-website-self.vercel.app/"
-            className="text-slate-blue hover:underline"
+            href="https://echoesofmahajan.vercel.app/"
+            className="text-blue-600 hover:underline"
           >
-            https://quotes-website-self.vercel.app/
+            https://echoesofmahajan.vercel.app/
           </a>
           ). This Privacy Policy explains how we collect, use, and protect your
           information when you visit our website.

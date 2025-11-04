@@ -3,7 +3,7 @@
 Effective date: October 2025
 Last updated: October 2025
 
-Mahajan's Quotes ("we", "us", "our") operates https://quotes-website-self.vercel.app/ (the "Site"). This Privacy Policy explains what information we collect, how we use it, how it may be shared, and the choices you have. By using the Site, you agree to the practices described here.
+Mahajan's Quotes ("we", "us", "our") operates https://echoesofmahajan.vercel.app/ (the "Site"). This Privacy Policy explains what information we collect, how we use it, how it may be shared, and the choices you have. By using the Site, you agree to the practices described here.
 
 ## 1) Information We Collect
 
@@ -95,7 +95,7 @@ We may update this Privacy Policy from time to time. The updated version will be
 If you have questions or requests, please contact us:
 
 Email: your-email@example.com
-Website: https://quotes-website-self.vercel.app/
+Website: https://echoesofmahajan.vercel.app/
 
 If you prefer to contact us by post, please provide a postal address here.
 
@@ -105,7 +105,7 @@ If you prefer to contact us by post, please provide a postal address here.
 
 **Last Updated:** October 2025
 
-Welcome to Mahajan's Quotes (https://quotes-website-self.vercel.app/). This Privacy Policy explains how we collect, use, and protect your information when you visit our website.
+Welcome to Mahajan's Quotes (https://echoesofmahajan.vercel.app/). This Privacy Policy explains how we collect, use, and protect your information when you visit our website.
 
 ## Information We Collect
 

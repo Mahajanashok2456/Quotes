@@ -11,10 +11,10 @@ export default function TermsPage() {
         <p className="text-sm mb-8">
           Welcome to Mahajan&apos;s Quotes (
           <a
-            href="https://quotes-website-self.vercel.app/"
+            href="https://echoesofmahajan.vercel.app/"
             className="text-slate-blue hover:underline"
           >
-            https://quotes-website-self.vercel.app/
+            https://echoesofmahajan.vercel.app/
           </a>
           ). By accessing or using this website, you agree to be bound by these
           Terms of Service (&quot;Terms&quot;). If you do not agree to these
