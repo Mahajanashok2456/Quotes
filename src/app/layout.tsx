@@ -46,6 +46,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Google Site Verification */}
+        <meta
+          name="google-site-verification"
+          content="mD8P1TvikOsTmnkuhx8MRrWJHMKff_scfERu"
+        />
+
         {/* Google Tag Manager */}
         <Script
           id="google-tag-manager"
