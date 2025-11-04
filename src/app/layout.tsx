@@ -52,6 +52,40 @@ export default function RootLayout({
           content="J0w54eoOuewY25381lOzMlB_okjRWCrCro8yJa-JhRM"
         />
 
+        {/* Structured Data (JSON-LD) for SEO */}
+        <Script
+          id="structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Echoes of Mahajan",
+              alternateName: ["Echoes Mahajan", "Mahajan Quotes"],
+              url: "https://echoesofmahajan.vercel.app",
+              description:
+                "Discover deeply aesthetic and inspiring quotes, poetry, and thoughts. Find motivation, wisdom, and beautiful words to brighten your day.",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate:
+                    "https://echoesofmahajan.vercel.app/?search={search_term_string}",
+                },
+                "query-input": "required name=search_term_string",
+              },
+              publisher: {
+                "@type": "Organization",
+                name: "Echoes of Mahajan",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://echoesofmahajan.vercel.app/og-image.jpg",
+                },
+              },
+            }),
+          }}
+        />
+
         {/* Google Tag Manager */}
         <Script
           id="google-tag-manager"

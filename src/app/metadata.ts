@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 
 export const homeMetadata: Metadata = {
-  title: "Echoes of Mahajan - Inspirational Quotes & Thoughts",
+  title: "Echoes of Mahajan | Inspirational Quotes & Wisdom",
   description:
-    "Discover deeply aesthetic and inspiring quotes, poetry, and thoughts. Find motivation, wisdom, and beautiful words to brighten your day from Echoes of Mahajan.",
+    "Echoes of Mahajan - Discover deeply aesthetic and inspiring quotes, poetry, and thoughts. Find motivation, wisdom, and beautiful words to brighten your day. Daily inspirational quotes and life wisdom.",
   keywords:
-    "quotes, inspiration, motivation, wisdom, poetry, thoughts, aesthetic quotes, daily inspiration, motivational quotes",
+    "echoes of mahajan, mahajan quotes, echoes mahajan, quotes, inspiration, motivation, wisdom, poetry, thoughts, aesthetic quotes, daily inspiration, motivational quotes, life wisdom, inspirational thoughts",
   openGraph: {
-    title: "Echoes of Mahajan - Inspirational Quotes & Thoughts",
+    title: "Echoes of Mahajan | Inspirational Quotes & Wisdom",
     description:
-      "Discover deeply aesthetic and inspiring quotes, poetry, and thoughts. Find motivation, wisdom, and beautiful words to brighten your day.",
+      "Echoes of Mahajan - Discover deeply aesthetic and inspiring quotes, poetry, and thoughts. Find motivation, wisdom, and beautiful words to brighten your day.",
     type: "website",
     url: "https://echoesofmahajan.vercel.app/",
     siteName: "Echoes of Mahajan",
@@ -24,9 +24,9 @@ export const homeMetadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Echoes of Mahajan - Inspirational Quotes & Thoughts",
+    title: "Echoes of Mahajan | Inspirational Quotes & Wisdom",
     description:
-      "Discover deeply aesthetic and inspiring quotes, poetry, and thoughts. Find motivation, wisdom, and beautiful words to brighten your day.",
+      "Echoes of Mahajan - Discover deeply aesthetic and inspiring quotes, poetry, and thoughts. Find motivation, wisdom, and beautiful words to brighten your day.",
     images: ["/og-image.jpg"],
   },
   alternates: {
