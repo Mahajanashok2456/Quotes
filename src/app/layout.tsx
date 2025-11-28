@@ -33,10 +33,10 @@ const homemadeApple = Homemade_Apple({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://echoesofmahajan.vercel.app'),
+  metadataBase: new URL("https://echoesofmahajan.vercel.app"),
   title: {
     default: "Echoes of Mahajan | Inspirational Quotes, Poetry & Life Wisdom",
-    template: "%s | Echoes of Mahajan"
+    template: "%s | Echoes of Mahajan",
   },
   description:
     "Discover deeply aesthetic and inspiring quotes, poetry, and thoughts at Echoes of Mahajan. Daily inspiration, motivational wisdom, and beautiful words to brighten your day. Explore curated collections of quotes on love, success, motivation, and personal growth.",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     "success quotes",
     "love quotes",
     "personal growth",
-    "mahajan quotes"
+    "mahajan quotes",
   ],
   authors: [{ name: "Mahajan", url: "https://echoesofmahajan.vercel.app" }],
   creator: "Mahajan",
@@ -63,38 +63,40 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://echoesofmahajan.vercel.app',
-    siteName: 'Echoes of Mahajan',
-    title: 'Echoes of Mahajan | Inspirational Quotes, Poetry & Life Wisdom',
-    description: 'Discover deeply aesthetic and inspiring quotes, poetry, and thoughts. Daily inspiration, motivational wisdom, and beautiful words to brighten your day.',
+    type: "website",
+    locale: "en_US",
+    url: "https://echoesofmahajan.vercel.app",
+    siteName: "Echoes of Mahajan",
+    title: "Echoes of Mahajan | Inspirational Quotes, Poetry & Life Wisdom",
+    description:
+      "Discover deeply aesthetic and inspiring quotes, poetry, and thoughts. Daily inspiration, motivational wisdom, and beautiful words to brighten your day.",
     images: [
       {
-        url: '/og-image.jpg',
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: 'Echoes of Mahajan - Inspirational Quotes and Wisdom',
+        alt: "Echoes of Mahajan - Inspirational Quotes and Wisdom",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Echoes of Mahajan | Inspirational Quotes & Life Wisdom',
-    description: 'Discover deeply aesthetic and inspiring quotes, poetry, and thoughts. Daily inspiration and motivational wisdom.',
-    images: ['/og-image.jpg'],
+    card: "summary_large_image",
+    title: "Echoes of Mahajan | Inspirational Quotes & Life Wisdom",
+    description:
+      "Discover deeply aesthetic and inspiring quotes, poetry, and thoughts. Daily inspiration and motivational wisdom.",
+    images: ["/og-image.jpg"],
   },
   alternates: {
-    canonical: 'https://echoesofmahajan.vercel.app',
+    canonical: "https://echoesofmahajan.vercel.app",
   },
   verification: {
-    google: 'J0w54eoOuewY25381lOzMlB_okjRWCrCro8yJa-JhRM',
+    google: "J0w54eoOuewY25381lOzMlB_okjRWCrCro8yJa-JhRM",
   },
 };
 

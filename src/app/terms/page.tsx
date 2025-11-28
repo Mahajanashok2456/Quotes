@@ -62,30 +62,33 @@ export default function TermsPage() {
         </p>
         <p className="mb-4">
           The website and its content are provided on an &quot;as is&quot; and
-          &quot;as available&quot; basis. We make no warranties, expressed or implied,
-          and hereby disclaim all other warranties, including implied warranties of
-          merchantability, fitness for a particular purpose, or non-infringement.
+          &quot;as available&quot; basis. We make no warranties, expressed or
+          implied, and hereby disclaim all other warranties, including implied
+          warranties of merchantability, fitness for a particular purpose, or
+          non-infringement.
         </p>
 
         <h2 className="text-2xl font-semibold mb-4 text-soft-peach">
           Third-Party Links and Advertisements
         </h2>
         <p className="mb-4">
-          Our website may contain links to third-party websites and advertisements.
-          We are not responsible for the content, privacy policies, or practices of
-          third-party sites. We display advertisements through Google AdSense, which
-          may use cookies to provide personalized ads. Your interaction with advertisers
-          and their websites is solely between you and such advertisers.
+          Our website may contain links to third-party websites and
+          advertisements. We are not responsible for the content, privacy
+          policies, or practices of third-party sites. We display advertisements
+          through Google AdSense, which may use cookies to provide personalized
+          ads. Your interaction with advertisers and their websites is solely
+          between you and such advertisers.
         </p>
 
         <h2 className="text-2xl font-semibold mb-4 text-soft-peach">
           User Responsibilities
         </h2>
         <p className="mb-4">
-          You agree to use the website only for lawful purposes and in a manner that
-          does not infringe the rights of, or restrict or inhibit the use and enjoyment
-          of the website by any third party. You must not misuse the website by introducing
-          viruses, trojans, worms, or other malicious material.
+          You agree to use the website only for lawful purposes and in a manner
+          that does not infringe the rights of, or restrict or inhibit the use
+          and enjoyment of the website by any third party. You must not misuse
+          the website by introducing viruses, trojans, worms, or other malicious
+          material.
         </p>
 
         <h2 className="text-2xl font-semibold mb-4 text-soft-peach">
