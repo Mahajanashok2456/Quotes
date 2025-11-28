@@ -1,0 +1,10 @@
+IMPORTANT: You need to create an og-image.jpg file (1200x630px) for social media sharing.
+
+You can:
+1. Use Canva.com to create a branded image with your site name
+2. Use any graphic design tool
+3. Take a screenshot of your best quote and resize to 1200x630px
+
+Place the image at: public/og-image.jpg
+
+For now, the metadata references this file but it needs to be created manually.

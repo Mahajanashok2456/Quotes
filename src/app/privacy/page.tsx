@@ -70,7 +70,7 @@ export default function PrivacyPolicy() {
         </p>
 
         <h2 className="text-2xl font-semibold mb-4 text-soft-peach">
-          Google AdSense
+          Google AdSense and Advertising
         </h2>
         <p className="mb-4">
           Mahajan&apos;s Quotes uses Google AdSense to display advertisements.
@@ -85,6 +85,66 @@ export default function PrivacyPolicy() {
             Google Privacy Policy
           </a>
           .
+        </p>
+        <p className="mb-4">
+          <strong>Third-Party Ad Vendors:</strong> We allow third-party companies,
+          including Google, to serve ads when you visit our website. These companies
+          may use information about your visits to this and other websites (not including
+          your name, address, email address, or telephone number) to provide advertisements
+          about goods and services of interest to you.
+        </p>
+        <p className="mb-4">
+          <strong>Google&apos;s Use of Advertising Cookies:</strong> Google uses cookies
+          to serve ads based on your prior visits to our website or other websites.
+          Google&apos;s use of advertising cookies enables it and its partners to serve
+          ads to you based on your visit to our site and/or other sites on the Internet.
+        </p>
+        <p className="mb-4">
+          <strong>Opting Out:</strong> You may opt out of personalized advertising by
+          visiting{" "}
+          <a
+            href="https://www.google.com/settings/ads"
+            className="text-slate-blue hover:underline"
+          >
+            Google Ads Settings
+          </a>
+          {" "}or by visiting{" "}
+          <a
+            href="http://www.aboutads.info/choices/"
+            className="text-slate-blue hover:underline"
+          >
+            aboutads.info
+          </a>
+          .
+        </p>
+
+        <h2 className="text-2xl font-semibold mb-4 text-soft-peach">
+          Data Security
+        </h2>
+        <p className="mb-4">
+          We implement appropriate technical and organizational measures to protect
+          your data against unauthorized or unlawful processing, accidental loss,
+          destruction, or damage. However, no method of transmission over the Internet
+          or electronic storage is 100% secure.
+        </p>
+
+        <h2 className="text-2xl font-semibold mb-4 text-soft-peach">
+          Children&apos;s Privacy
+        </h2>
+        <p className="mb-4">
+          Our website is intended for a general audience and does not knowingly collect
+          personal information from children under the age of 13. If you believe we have
+          collected information from a child under 13, please contact us immediately.
+        </p>
+
+        <h2 className="text-2xl font-semibold mb-4 text-soft-peach">
+          Changes to This Privacy Policy
+        </h2>
+        <p className="mb-4">
+          We may update this Privacy Policy from time to time. We will notify you of
+          any changes by posting the new Privacy Policy on this page and updating the
+          &quot;Effective Date&quot; at the top. You are advised to review this Privacy
+          Policy periodically for any changes.
         </p>
 
         <h2 className="text-2xl font-semibold mb-4 text-soft-peach">
